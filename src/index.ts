@@ -44,3 +44,22 @@ function drawField(matrix:Array<any>):void{
 
 drawField(arr)
 console.log(arr);
+
+
+function countBestFields(matrix:Array<any>):number{
+  let count=0
+  for(let i:number=0;i<matrix.length;i++){
+    for(let j:number=0;j<matrix.length;j++){
+      if(arr[i][j][0]==10){
+        count=count+1;
+      }
+    }
+  }
+  console.log('Num of best fields '+count);
+  console.log('Num of tribal in this world '+Math.floor(count/5));
+  return Math.floor(count/5);
+}
+
+countBestFields(arr);
+
+

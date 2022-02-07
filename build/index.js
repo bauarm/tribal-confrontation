@@ -38,3 +38,17 @@ function drawField(matrix) {
 }
 drawField(arr);
 console.log(arr);
+function countBestFields(matrix) {
+    let count = 0;
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix.length; j++) {
+            if (arr[i][j][0] == 10) {
+                count = count + 1;
+            }
+        }
+    }
+    console.log('Num of best fields ' + count);
+    console.log('Num of tribal in this world ' + Math.floor(count / 5));
+    return Math.floor(count / 5);
+}
+countBestFields(arr);
