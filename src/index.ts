@@ -1,4 +1,7 @@
 import {getId,minmaxRand} from "./Helpers.js";
+import {game} from "./Animation.js";
+
+//game();
 
 const canvas = getId('canvas');
 

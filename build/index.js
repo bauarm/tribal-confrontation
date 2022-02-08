@@ -1,4 +1,5 @@
 import { getId, minmaxRand } from "./Helpers.js";
+//game();
 const canvas = getId('canvas');
 function getSum(a, b) {
     return a + b;
