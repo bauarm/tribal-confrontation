@@ -1,3 +1,4 @@
+let isPaused:boolean = false;
 
 let nextGameStep=(function(){
 	return requestAnimationFrame
@@ -5,10 +6,14 @@ let nextGameStep=(function(){
 
 export function game():void{
   nextGameStep(game);
-  makeTime()	
-};
+  if (isPaused) {
+    makeTime();
+  }
+}
 	
-
+export function setPaused():void {
+  isPaused = !isPaused; 
+}
 
 let tick:number=0
 function makeTime() {

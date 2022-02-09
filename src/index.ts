@@ -1,7 +1,9 @@
 import {getId,minmaxRand} from "./Helpers.js";
-import {game} from "./Animation.js";
+import {game,setPaused} from "./Animation.js";
 
-//game();
+game();
+document.querySelector('#pauseBtn')?.addEventListener('click',()=>setPaused());
+
 
 const canvas = getId('canvas');
 
