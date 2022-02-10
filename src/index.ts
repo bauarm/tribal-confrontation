@@ -1,11 +1,11 @@
 import {getId,minmaxRand} from "./Helpers.js";
 import {game,setPaused} from "./Animation.js";
-import {generateTribes} from "./makeTribes.js";
+import {getStatTribe} from "./makeTribes.js";
 
 game();
 document.querySelector('#pauseBtn')?.addEventListener('click',()=>setPaused());
 
-console.log(generateTribes())
+getStatTribe();
 const canvas = getId('canvas');
 
 function getSum(a:number,b:number):number{

@@ -8,6 +8,17 @@ export function generateTribes(){
     tribal.push(pers);
   }
   return tribal;
+}
+
+export function getStatTribe(){
+  let info=generateTribes();
+  let female:number=0,males:number=0;
+  for(let i:number=0;i<info.length;i++){
+    if(info[i].gender) female++;
+    else males++
+}
+  
+  console.log('Males '+males,'Females '+female)
   
 }
 

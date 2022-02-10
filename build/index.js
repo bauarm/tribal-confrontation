@@ -1,8 +1,10 @@
 var _a;
 import { getId, minmaxRand } from "./Helpers.js";
 import { game, setPaused } from "./Animation.js";
+import { getStatTribe } from "./makeTribes.js";
 game();
 (_a = document.querySelector('#pauseBtn')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', () => setPaused());
+getStatTribe();
 const canvas = getId('canvas');
 function getSum(a, b) {
     return a + b;

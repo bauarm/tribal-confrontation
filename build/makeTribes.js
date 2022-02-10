@@ -1,6 +1,23 @@
 import { minmaxRand } from "./Helpers.js";
-function generateTribes() {
+export function generateTribes() {
     let getTribesSize = minmaxRand(400, 600);
+    let tribal = [];
+    for (let i = 0; i < getTribesSize; i++) {
+        let pers = makePers();
+        tribal.push(pers);
+    }
+    return tribal;
+}
+export function getStatTribe() {
+    let info = generateTribes();
+    let female = 0, males = 0;
+    for (let i = 0; i < info.length; i++) {
+        if (info[i].gender)
+            female++;
+        else
+            males++;
+    }
+    console.log('Males ' + males, 'Females ' + female);
 }
 function addGarmon(gend) {
     let garmon = [];
