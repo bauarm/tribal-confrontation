@@ -1,8 +1,13 @@
 import {minmaxRand} from "./Helpers.js";
 
-function generateTribes(){
+export function generateTribes(){
   let getTribesSize:number=minmaxRand(400, 600);
-  
+  let tribal=[];
+  for(let i:number=0;i<getTribesSize;i++){
+    let pers=makePers()
+    tribal.push(pers);
+  }
+  return tribal;
   
 }
 
