@@ -4,6 +4,9 @@ import { game, setPaused } from "./Animation.js";
 import { getStatTribe } from "./makeTribes.js";
 game();
 (_a = document.querySelector('#pauseBtn')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', () => setPaused());
+//console.log(generateTribes())
+getStatTribe();
+getStatTribe();
 getStatTribe();
 const canvas = getId('canvas');
 function getSum(a, b) {

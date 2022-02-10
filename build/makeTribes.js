@@ -18,6 +18,14 @@ export function getStatTribe() {
             males++;
     }
     console.log('Males ' + males, 'Females ' + female);
+    console.log('Power tribes ' + getPowerTribe(info));
+}
+function getPowerTribe(info) {
+    let sumPower = 0;
+    for (let i = 0; i < info.length; i++) {
+        sumPower += info[i].power;
+    }
+    return sumPower;
 }
 function addGarmon(gend) {
     let garmon = [];

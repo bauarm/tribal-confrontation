@@ -18,8 +18,17 @@ export function getStatTribe(){
     else males++
 }
   
-  console.log('Males '+males,'Females '+female)
+  console.log('Males '+males,'Females '+female);
+  console.log('Power tribes '+getPowerTribe(info))
   
+}
+
+function getPowerTribe(info:any):number{
+  let sumPower:number=0;
+  for(let i:number=0;i<info.length;i++){
+    sumPower+=info[i].power
+  }
+  return sumPower;
 }
 
 

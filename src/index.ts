@@ -1,10 +1,12 @@
 import {getId,minmaxRand} from "./Helpers.js";
 import {game,setPaused} from "./Animation.js";
-import {getStatTribe} from "./makeTribes.js";
+import {getStatTribe,generateTribes} from "./makeTribes.js";
 
 game();
 document.querySelector('#pauseBtn')?.addEventListener('click',()=>setPaused());
-
+//console.log(generateTribes())
+getStatTribe();
+getStatTribe();
 getStatTribe();
 const canvas = getId('canvas');
 
