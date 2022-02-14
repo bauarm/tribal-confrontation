@@ -1,23 +1,23 @@
 let isPaused:boolean = false;
 
-let nextGameStep=(function(){
-	return requestAnimationFrame
-})();
+const nextGameStep = (function () {
+  return requestAnimationFrame;
+}());
 
-export function game():void{
+let tick:number = 0;
+
+function makeTime() {
+  tick += 1;
+  console.log(tick);
+}
+
+export function game():void {
   nextGameStep(game);
   if (isPaused) {
     makeTime();
   }
 }
-	
-export function setPaused():void {
-  isPaused = !isPaused; 
-}
 
-let tick:number=0
-function makeTime() {
-  tick+=1;
-  console.log(tick)
-   
-  }
+export function setPaused():void {
+  isPaused = !isPaused;
+}
