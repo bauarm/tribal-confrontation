@@ -1,5 +1,6 @@
 let isPaused:boolean = false;
 
+// eslint-disable-next-line func-names
 const nextGameStep = (function () {
   return requestAnimationFrame;
 }());

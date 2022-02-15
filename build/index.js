@@ -1,29 +1,29 @@
 var _a;
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import { getId, minmaxRand } from "./Helpers.js";
 import { game, setPaused } from "./Animation.js";
 import { getStatTribe } from "./makeTribes.js";
+import { measureDistance } from "./measureDistance.js";
 game();
-(_a = document.querySelector('#pauseBtn')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', () => setPaused());
-//console.log(generateTribes())
+(_a = document.querySelector("#pauseBtn")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => setPaused());
 getStatTribe();
 getStatTribe();
 getStatTribe();
-const canvas = getId('canvas');
-function getSum(a, b) {
-    return a + b;
-}
-let grid = 32;
-let sizeField = 17;
-let sizeSceneX = grid * sizeField;
-let sizeSceneY = grid * sizeField;
+console.log(measureDistance([1, 5], [2, 7]));
+const canvas = getId("canvas");
+const grid = 32;
+const sizeField = 17;
+const sizeSceneX = grid * sizeField;
+const sizeSceneY = grid * sizeField;
 canvas.width = sizeSceneX;
 canvas.height = sizeSceneY;
-const ctx = canvas.getContext('2d');
+const ctx = canvas.getContext("2d");
 function fillMatrix(scale = 17) {
-    let arr = [];
-    for (let i = 0; i < scale; i++) {
+    const arr = [];
+    for (let i = 0; i < scale; i += 1) {
         arr[i] = (new Array(scale)).fill(0);
-        for (let j = 0; j < scale; j++) {
+        for (let j = 0; j < scale; j += 1) {
             if (j > 0 && i > 0 && j < scale - 1 && i < scale - 1) {
                 arr[i][j] = [minmaxRand(1, 10), 0];
             }
@@ -34,13 +34,14 @@ function fillMatrix(scale = 17) {
     }
     return arr;
 }
-let arr = fillMatrix(sizeField);
+const arr = fillMatrix(sizeField);
 function drawField(matrix) {
-    for (let i = 0; i < matrix.length; i++) {
-        for (let j = 0; j < matrix.length; j++) {
+    for (let i = 0; i < matrix.length; i += 1) {
+        for (let j = 0; j < matrix.length; j += 1) {
             ctx.strokeRect(i * grid, j * grid, grid, grid);
             ctx.font = "12px Ubuntu";
-            arr[i][j][0] == 10 ? ctx.fillStyle = "blue" : ctx.fillStyle = "red";
+            // eslint-disable-next-line no-unused-expressions
+            arr[i][j][0] === 10 ? ctx.fillStyle = "blue" : ctx.fillStyle = "red";
             ctx.fillText(arr[i][j][0], i * grid + 10, j * grid + 18);
         }
     }
@@ -49,15 +50,15 @@ drawField(arr);
 console.log(arr);
 function countBestFields(matrix) {
     let count = 0;
-    for (let i = 0; i < matrix.length; i++) {
-        for (let j = 0; j < matrix.length; j++) {
-            if (arr[i][j][0] == 10) {
-                count = count + 1;
+    for (let i = 0; i < matrix.length; i += 1) {
+        for (let j = 0; j < matrix.length; j += 1) {
+            if (arr[i][j][0] === 10) {
+                count += 1;
             }
         }
     }
-    console.log('Num of best fields ' + count);
-    console.log('Num of tribal in this world ' + Math.floor(count / 5));
+    console.log(`Num of best fields ${count}`);
+    console.log(`Num of tribal in this world ${Math.floor(count / 5)}`);
     return Math.floor(count / 5);
 }
 countBestFields(arr);

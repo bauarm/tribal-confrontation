@@ -1,35 +1,17 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import { minmaxRand } from "./Helpers.js";
-export function generateTribes() {
-    let getTribesSize = minmaxRand(400, 600);
-    let tribal = [];
-    for (let i = 0; i < getTribesSize; i++) {
-        let pers = makePers();
-        tribal.push(pers);
-    }
-    return tribal;
-}
-export function getStatTribe() {
-    let info = generateTribes();
-    let female = 0, males = 0;
-    for (let i = 0; i < info.length; i++) {
-        if (info[i].gender)
-            female++;
-        else
-            males++;
-    }
-    console.log('Males ' + males, 'Females ' + female);
-    console.log('Power tribes ' + getPowerTribe(info));
-}
 function getPowerTribe(info) {
     let sumPower = 0;
-    for (let i = 0; i < info.length; i++) {
+    for (let i = 0; i < info.length; i += 1) {
         sumPower += info[i].power;
     }
     return sumPower;
 }
 function addGarmon(gend) {
-    let garmon = [];
-    let tostesterone, estrogen;
+    const garmon = [];
+    let tostesterone;
+    let estrogen;
     if (gend === 1) {
         tostesterone = minmaxRand(0, 50);
         estrogen = minmaxRand(25, 100);
@@ -45,24 +27,7 @@ function addGarmon(gend) {
 function getGender() {
     return Math.floor(Math.random() * 2);
 }
-function makePers() {
-    let gender = getGender();
-    let garmon = addGarmon(gender);
-    let tostesterone = garmon[0], estrogen = garmon[1];
-    let height = minmaxRand(150, 200);
-    let mass = minmaxRand(60, 120);
-    let power = getPower(tostesterone, estrogen);
-    //let agility=getAgility(height,mass);
-    return {
-        gender: gender,
-        height: height,
-        mass: mass,
-        power: power,
-        //agility:agility,
-        tostesterone: tostesterone,
-    };
-}
-function getPower(tostesterone, estrogen) {
+function getPower(tostesterone) {
     let tpower = 0;
     if (tostesterone < 25) {
         tpower = minmaxRand(100, 500);
@@ -77,4 +42,43 @@ function getPower(tostesterone, estrogen) {
         tpower = minmaxRand(1500, 2000);
     }
     return tpower;
+}
+function makePers() {
+    const gender = getGender();
+    const garmon = addGarmon(gender);
+    const tostesterone = garmon[0];
+    const height = minmaxRand(150, 200);
+    const mass = minmaxRand(60, 120);
+    const power = getPower(tostesterone);
+    // let agility=getAgility(height,mass);
+    return {
+        gender,
+        height,
+        mass,
+        power,
+        // agility:agility,
+        tostesterone,
+    };
+}
+export function generateTribes() {
+    const getTribesSize = minmaxRand(400, 600);
+    const tribal = [];
+    for (let i = 0; i < getTribesSize; i += 1) {
+        const pers = makePers();
+        tribal.push(pers);
+    }
+    return tribal;
+}
+export function getStatTribe() {
+    const info = generateTribes();
+    let female = 0;
+    let males = 0;
+    for (let i = 0; i < info.length; i += 1) {
+        if (info[i].gender)
+            female += 1;
+        else
+            males += 1;
+    }
+    console.log(`Males ${males}`, `Females ${female}`);
+    console.log(`Power tribes ${getPowerTribe(info)}`);
 }

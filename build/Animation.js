@@ -1,7 +1,13 @@
 let isPaused = false;
-let nextGameStep = (function () {
+// eslint-disable-next-line func-names
+const nextGameStep = (function () {
     return requestAnimationFrame;
-})();
+}());
+let tick = 0;
+function makeTime() {
+    tick += 1;
+    console.log(tick);
+}
 export function game() {
     nextGameStep(game);
     if (isPaused) {
@@ -10,9 +16,4 @@ export function game() {
 }
 export function setPaused() {
     isPaused = !isPaused;
-}
-let tick = 0;
-function makeTime() {
-    tick += 1;
-    console.log(tick);
 }
