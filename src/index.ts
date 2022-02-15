@@ -76,11 +76,19 @@ function setTribes():void {
   let passStep:number = 0;
   for (let i:number = 2; i < arr.length - 2; i += 1) {
     for (let j:number = 2; j < arr.length - 2; j += 1) {
-      passStep = minmaxRand(0, 2);
+      passStep = minmaxRand(0, 1);
       if (arr[i][j][0] > 9 && arr[i][j][1] === 0 && count < allTribes.length && passStep === 0) {
+        const tribeList = allTribes[count][1];
+        arr[i][j][1] = tribeList;
+        allTribes[count][2][0] = i;
+        allTribes[count][2][1] = j;
         count += 1;
       }
     }
   }
+  console.log(arr);
+  console.log(allTribes);
 }
+document.querySelector("#setTribes")?.addEventListener("click", () => setTribes());
+
 console.log(allTribes);

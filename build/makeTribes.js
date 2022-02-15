@@ -70,6 +70,7 @@ export function generateTribes() {
     }
     tribal.push(minmaxRand(100, 999));
     tribal.push(getColor());
+    tribal.push([0, 0]);
     tribal.push(tribalPersons);
     return tribal;
 }
