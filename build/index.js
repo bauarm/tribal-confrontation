@@ -3,14 +3,9 @@ var _a;
 /* eslint-disable import/no-unresolved */
 import { getId, minmaxRand } from "./Helpers.js";
 import { game, setPaused } from "./Animation.js";
-import { getStatTribe } from "./makeTribes.js";
-import { measureDistance } from "./measureDistance.js";
+import { generateTribes } from "./makeTribes.js";
 game();
 (_a = document.querySelector("#pauseBtn")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => setPaused());
-getStatTribe();
-getStatTribe();
-getStatTribe();
-console.log(measureDistance([1, 5], [2, 7]));
 const canvas = getId("canvas");
 const grid = 32;
 const sizeField = 17;
@@ -35,6 +30,7 @@ function fillMatrix(scale = 17) {
     return arr;
 }
 const arr = fillMatrix(sizeField);
+console.log(arr);
 function drawField(matrix) {
     for (let i = 0; i < matrix.length; i += 1) {
         for (let j = 0; j < matrix.length; j += 1) {
@@ -47,7 +43,6 @@ function drawField(matrix) {
     }
 }
 drawField(arr);
-console.log(arr);
 function countBestFields(matrix) {
     let count = 0;
     for (let i = 0; i < matrix.length; i += 1) {
@@ -59,6 +54,27 @@ function countBestFields(matrix) {
     }
     console.log(`Num of best fields ${count}`);
     console.log(`Num of tribal in this world ${Math.floor(count / 5)}`);
-    return Math.floor(count / 5);
+    return Math.floor(count / 3);
 }
 countBestFields(arr);
+const allTribes = [];
+function makeAllTribes() {
+    const bestFields = countBestFields(arr);
+    for (let i = 0; i < bestFields; i += 1) {
+        allTribes.push(generateTribes());
+    }
+}
+makeAllTribes();
+function setTribes() {
+    let count = 0;
+    let passStep = 0;
+    for (let i = 2; i < arr.length - 2; i += 1) {
+        for (let j = 2; j < arr.length - 2; j += 1) {
+            passStep = minmaxRand(0, 2);
+            if (arr[i][j][0] > 9 && arr[i][j][1] === 0 && count < allTribes.length && passStep === 0) {
+                count += 1;
+            }
+        }
+    }
+}
+console.log(allTribes);

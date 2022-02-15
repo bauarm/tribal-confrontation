@@ -1,6 +1,14 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
-import { minmaxRand } from "./Helpers.js";
+import { minmaxRand, getColor } from "./Helpers.js";
+
+interface PersForTribe {
+  gender: number;
+  height: number;
+  mass: number;
+  power: number;
+  tostesterone: number;
+}
 
 function getPowerTribe(info:any):number {
   let sumPower:number = 0;
@@ -43,7 +51,7 @@ function getPower(tostesterone:number):number {
   return tpower;
 }
 
-function makePers() {
+function makePers():PersForTribe {
   const gender:number = getGender();
   const garmon:Array<number> = addGarmon(gender);
   const tostesterone:number = garmon[0];
@@ -61,13 +69,17 @@ function makePers() {
   };
 }
 
-export function generateTribes() {
+export function generateTribes():Array<any> {
   const getTribesSize:number = minmaxRand(400, 600);
+  const tribalPersons = [];
   const tribal = [];
   for (let i:number = 0; i < getTribesSize; i += 1) {
     const pers = makePers();
-    tribal.push(pers);
+    tribalPersons.push(pers);
   }
+  tribal.push(minmaxRand(100, 999));
+  tribal.push(getColor());
+  tribal.push(tribalPersons);
   return tribal;
 }
 

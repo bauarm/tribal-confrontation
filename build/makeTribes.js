@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
-import { minmaxRand } from "./Helpers.js";
+import { minmaxRand, getColor } from "./Helpers.js";
 function getPowerTribe(info) {
     let sumPower = 0;
     for (let i = 0; i < info.length; i += 1) {
@@ -62,11 +62,15 @@ function makePers() {
 }
 export function generateTribes() {
     const getTribesSize = minmaxRand(400, 600);
+    const tribalPersons = [];
     const tribal = [];
     for (let i = 0; i < getTribesSize; i += 1) {
         const pers = makePers();
-        tribal.push(pers);
+        tribalPersons.push(pers);
     }
+    tribal.push(minmaxRand(100, 999));
+    tribal.push(getColor());
+    tribal.push(tribalPersons);
     return tribal;
 }
 export function getStatTribe() {
