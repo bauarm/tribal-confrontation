@@ -3,6 +3,7 @@
 import { getId, minmaxRand } from "./Helpers.js";
 import { game, setPaused } from "./Animation.js";
 import { generateTribes } from "./makeTribes.js";
+import { makeTime } from "./calendar";
 
 game();
 document.querySelector("#pauseBtn")?.addEventListener("click", () => setPaused());

@@ -5,11 +5,18 @@ const nextGameStep = (function () {
   return requestAnimationFrame;
 }());
 
-let tick:number = 0;
+interface ITimer {
+  tick:number;
+  curTick:number;
+}
+
+export const timer:ITimer = {
+  tick: 0,
+  curTick: 0,
+};
 
 function makeTime() {
-  tick += 1;
-  console.log(tick);
+  timer.tick += 1;
 }
 
 export function game():void {

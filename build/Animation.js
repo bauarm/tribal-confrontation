@@ -3,10 +3,12 @@ let isPaused = false;
 const nextGameStep = (function () {
     return requestAnimationFrame;
 }());
-let tick = 0;
+export const timer = {
+    tick: 0,
+    curTick: 0,
+};
 function makeTime() {
-    tick += 1;
-    console.log(tick);
+    timer.tick += 1;
 }
 export function game() {
     nextGameStep(game);
