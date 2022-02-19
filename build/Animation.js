@@ -10,16 +10,19 @@ export const timer = {
     mount: 3,
     year: 1040,
 };
+const cday = document.querySelector("#tday");
+const cmount = document.querySelector("#tmount");
 function makeTime() {
-    console.log(`Day ${timer.day} mount ${timer.mount} year ${timer.year}`);
     timer.tick += 1;
     if (timer.tick > 30) {
         timer.day += 1;
         timer.tick = 0;
+        cday.innerHTML = timer.day.toString();
     }
     if (timer.day > 30) {
         timer.mount += 1;
         timer.day = 1;
+        cmount.innerHTML = timer.mount.toString();
     }
     if (timer.mount > 12) {
         timer.year += 1;

@@ -14,6 +14,8 @@ const sizeSceneY = grid * sizeField;
 canvas.width = sizeSceneX;
 canvas.height = sizeSceneY;
 const ctx = canvas.getContext("2d");
+ctx.fillStyle = "rgb(128, 128, 0)";
+ctx.fillRect(0, 0, sizeSceneX, sizeSceneY);
 function fillMatrix(scale = 17) {
     const arr = [];
     for (let i = 0; i < scale; i += 1) {
@@ -34,6 +36,7 @@ console.log(arr);
 function drawField(matrix) {
     for (let i = 0; i < matrix.length; i += 1) {
         for (let j = 0; j < matrix.length; j += 1) {
+            ctx.strokeStyle = "white";
             ctx.strokeRect(i * grid, j * grid, grid, grid);
             ctx.font = "12px Ubuntu";
             // eslint-disable-next-line no-unused-expressions

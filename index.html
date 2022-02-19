@@ -4,13 +4,26 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<div>
+	
+	
+	<header class="header">
+		<div class="date-panel">
+			<span class="date-panel__day" id="tday">1</span>
+			<span class="date-panel__mount" id="tmount">3</span>
+			<span class="date-panel__year" id="tyear">1040</span>
+		</div>
+	</header>
+	<div class="testbtn">
 		<button id="pauseBtn">Pause</button>
 		<button id="setTribes">Set Tribes</button>
 	</div>
-	<canvas id="canvas"></canvas>
+	<section class="inner">
+		<canvas id="canvas"></canvas>
+	</section>
+	
 <script src="/build/index.js" type="module"></script>
 </body>
 </html>
