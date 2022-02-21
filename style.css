@@ -34,11 +34,11 @@
 }
 .date-panel__mount{
   display: inline-block;
-  width: 60px;
-  text-align: center;
+  width: 100px;
+  text-align: left;
 }
 .date-panel__year{
   display: inline-block;
   width: 60px;
-  text-align: center;
+  text-align: left;
 }

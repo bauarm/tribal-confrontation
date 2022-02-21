@@ -11,6 +11,7 @@ interface ITimer {
   day:number;
   mount:number;
   year:number;
+  mountName:Array<string>;
 }
 
 export const timer:ITimer = {
@@ -19,12 +20,18 @@ export const timer:ITimer = {
   day: 1,
   mount: 3,
   year: 1040,
+  mountName: ["", "зима", "позд. зима", "ран. весна", "весна", "позд. весна", "ран. лето", "лето", "позд. лето", "ран. осень", "осень", "позд. осень", "ран. зима"],
 };
-const cday = document.querySelector("#tday") as HTMLInputElement;
-const cmount = document.querySelector("#tmount") as HTMLInputElement;
+
 function makeTime() {
+  const cday = document.querySelector("#tday") as HTMLInputElement;
+  const cmount = document.querySelector("#tmount") as HTMLInputElement;
+  const cyear = document.querySelector("#tyear") as HTMLInputElement;
+  cday.innerHTML = timer.day.toString();
+  cmount.innerHTML = timer.mountName[timer.mount];
+  cyear.innerHTML = timer.year.toString();
   timer.tick += 1;
-  if (timer.tick > 30) {
+  if (timer.tick > 10) {
     timer.day += 1;
     timer.tick = 0;
     cday.innerHTML = timer.day.toString();
@@ -32,11 +39,12 @@ function makeTime() {
   if (timer.day > 30) {
     timer.mount += 1;
     timer.day = 1;
-    cmount.innerHTML = timer.mount.toString();
+    cmount.innerHTML = timer.mountName[timer.mount];
   }
   if (timer.mount > 12) {
     timer.year += 1;
     timer.mount = 1;
+    cyear.innerHTML = timer.year.toString();
   }
 }
 
