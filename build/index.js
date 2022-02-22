@@ -4,6 +4,7 @@ var _a, _b;
 import { getId, minmaxRand } from "./Helpers.js";
 import { game, setPaused } from "./Animation.js";
 import { generateTribes } from "./makeTribes.js";
+// import { makeTime } from "./calendar";
 game();
 (_a = document.querySelector("#pauseBtn")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => setPaused());
 const canvas = getId("canvas");
@@ -16,23 +17,34 @@ canvas.height = sizeSceneY;
 const ctx = canvas.getContext("2d");
 ctx.fillStyle = "rgb(128, 128, 0)";
 ctx.fillRect(0, 0, sizeSceneX, sizeSceneY);
-function fillMatrix(scale = 17) {
+function fillArrWorld(scale = 17) {
     const arr = [];
     for (let i = 0; i < scale; i += 1) {
         arr[i] = (new Array(scale)).fill(0);
         for (let j = 0; j < scale; j += 1) {
-            if (j > 0 && i > 0 && j < scale - 1 && i < scale - 1) {
-                arr[i][j] = [minmaxRand(1, 10), 0];
-            }
-            else {
-                arr[i][j] = [0, 0];
-            }
+            arr[i][j] = [0, 0, 0];
+        }
+    }
+    return arr;
+}
+function fillMatrix(scale = 17) {
+    const arr = fillArrWorld(sizeField);
+    for (let i = 1; i < scale - 1; i += 1) {
+        const startPoint = Math.floor(minmaxRand(1, 4));
+        const endPoint = Math.floor(minmaxRand((scale - 5), scale - 1));
+        for (let j = startPoint; j < endPoint; j += 1) {
+            arr[i][j] = [minmaxRand(1, 10), 0];
+            console.log(`start ${startPoint}  end ${endPoint} `);
         }
     }
     return arr;
 }
 const arr = fillMatrix(sizeField);
 console.log(arr);
+const rect = (x, y, w, h, color) => {
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, w, h);
+};
 function drawField(matrix) {
     for (let i = 0; i < matrix.length; i += 1) {
         for (let j = 0; j < matrix.length; j += 1) {
@@ -41,6 +53,18 @@ function drawField(matrix) {
             ctx.font = "12px Ubuntu";
             // eslint-disable-next-line no-unused-expressions
             arr[i][j][0] === 10 ? ctx.fillStyle = "blue" : ctx.fillStyle = "red";
+            if (arr[i][j][0] === 10) {
+                rect(i * grid, j * grid, grid, grid, "rgb(0, 153, 0)");
+                ctx.fillStyle = "blue";
+            }
+            else if (arr[i][j][0] === 0) {
+                rect(i * grid, j * grid, grid, grid, "rgb(0, 128, 255)");
+                ctx.fillStyle = "blue";
+            }
+            else if (arr[i][j][0] < 3 && arr[i][j][0] !== 0) {
+                rect(i * grid, j * grid, grid, grid, "rgb(255, 102, 51)");
+                ctx.fillStyle = "white";
+            }
             ctx.fillText(arr[i][j][0], i * grid + 10, j * grid + 18);
         }
     }
