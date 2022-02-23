@@ -94,7 +94,7 @@ function countBestFields(matrix:Array<any>):number {
   console.log(`Num of tribal in this world ${Math.floor(count / 3)}`);
   return Math.floor(count / 3);
 }
-//countBestFields(arr);
+// countBestFields(arr);
 
 const allTribes:Array<any> = [];
 function makeAllTribes():void {
@@ -104,7 +104,14 @@ function makeAllTribes():void {
   }
 }
 makeAllTribes();
-
+function writeText(i:number, j:number,count:number, listTrb:Array<any>):void {
+  ctx.fillStyle = listTrb[count][1];
+  ctx.fillRect(i * grid, j * grid, grid, grid);
+  ctx.font = "14px Ubuntu";
+  ctx.fillStyle = "white";
+  // ctx.textAlign = "center";
+  ctx.fillText(listTrb[count][1], i * grid + 4, j * grid + 20);
+}
 function setTribes():void {
   let count:number = 0;
   let passStep:number = 0;
@@ -116,6 +123,7 @@ function setTribes():void {
         arr[i][j][1] = tribeList;
         allTribes[count][2][0] = i;
         allTribes[count][2][1] = j;
+        rect(i * grid, j * grid, grid, grid, allTribes[count][1]);
         count += 1;
       }
     }

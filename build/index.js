@@ -86,7 +86,7 @@ function countBestFields(matrix) {
     console.log(`Num of tribal in this world ${Math.floor(count / 3)}`);
     return Math.floor(count / 3);
 }
-//countBestFields(arr);
+// countBestFields(arr);
 const allTribes = [];
 function makeAllTribes() {
     const bestFields = countBestFields(arr);
@@ -95,6 +95,14 @@ function makeAllTribes() {
     }
 }
 makeAllTribes();
+function writeText(i, j, count, listTrb) {
+    ctx.fillStyle = listTrb[count][1];
+    ctx.fillRect(i * grid, j * grid, grid, grid);
+    ctx.font = "14px Ubuntu";
+    ctx.fillStyle = "white";
+    // ctx.textAlign = "center";
+    ctx.fillText(listTrb[count][1], i * grid + 4, j * grid + 20);
+}
 function setTribes() {
     let count = 0;
     let passStep = 0;
@@ -106,6 +114,7 @@ function setTribes() {
                 arr[i][j][1] = tribeList;
                 allTribes[count][2][0] = i;
                 allTribes[count][2][1] = j;
+                rect(i * grid, j * grid, grid, grid, allTribes[count][1]);
                 count += 1;
             }
         }
