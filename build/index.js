@@ -34,7 +34,6 @@ function fillMatrix(scale = 17) {
         const endPoint = Math.floor(minmaxRand((scale - 5), scale - 1));
         for (let j = startPoint; j < endPoint; j += 1) {
             arr[i][j] = [minmaxRand(1, 10), 0];
-            console.log(`start ${startPoint}  end ${endPoint} `);
         }
     }
     return arr;
@@ -62,7 +61,11 @@ function drawField(matrix) {
                 ctx.fillStyle = "blue";
             }
             else if (arr[i][j][0] < 3 && arr[i][j][0] !== 0) {
-                rect(i * grid, j * grid, grid, grid, "rgb(255, 102, 51)");
+                rect(i * grid, j * grid, grid, grid, "rgb(204, 204, 0)");
+                ctx.fillStyle = "white";
+            }
+            else if (arr[i][j][0] > 2 && arr[i][j][0] < 10) {
+                rect(i * grid, j * grid, grid, grid, "rgb(102, 153, 0)");
                 ctx.fillStyle = "white";
             }
             ctx.fillText(arr[i][j][0], i * grid + 10, j * grid + 18);
@@ -80,10 +83,10 @@ function countBestFields(matrix) {
         }
     }
     console.log(`Num of best fields ${count}`);
-    console.log(`Num of tribal in this world ${Math.floor(count / 5)}`);
+    console.log(`Num of tribal in this world ${Math.floor(count / 3)}`);
     return Math.floor(count / 3);
 }
-countBestFields(arr);
+//countBestFields(arr);
 const allTribes = [];
 function makeAllTribes() {
     const bestFields = countBestFields(arr);
