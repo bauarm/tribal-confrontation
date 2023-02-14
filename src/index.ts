@@ -3,6 +3,8 @@
 import { getId, minmaxRand } from "./Helpers.js";
 import { game, setPaused } from "./Animation.js";
 import { generateTribes } from "./makeTribes.js";
+import generateIsland from "./generateIsland.js";
+import drawIsland from "./drawIsland.js";
 // import { makeTime } from "./calendar";
 
 game();
@@ -22,64 +24,23 @@ const ctx = canvas.getContext("2d");
 ctx.fillStyle = "rgb(128, 128, 0)";
 ctx.fillRect(0, 0, sizeSceneX, sizeSceneY);
 
-function fillArrWorld(scale:number = 17):Array<any> {
-  const arr:Array<any> = [];
-  for (let i:number = 0; i < scale; i += 1) {
-    arr[i] = (new Array(scale)).fill(0);
-    for (let j:number = 0; j < scale; j += 1) {
-      arr[i][j] = [0, 0, 0];
-    }
-  }
-  return arr;
-}
+const arr = generateIsland(sizeField);
 
-function fillMatrix(scale:number = 17):Array<any> {
-  const arr:Array<any> = fillArrWorld(sizeField);
-  for (let i:number = 1; i < scale - 1; i += 1) {
-    const startPoint:number = Math.floor(minmaxRand(1, 4));
-    const endPoint:number = Math.floor(minmaxRand((scale - 5), scale - 1));
-    for (let j:number = startPoint; j < endPoint; j += 1) {
-      arr[i][j] = [minmaxRand(1, 10), 0];
-    }
-  }
-  return arr;
-}
-
-const arr = fillMatrix(sizeField);
-console.log(arr);
+drawIsland(arr);
 
 const rect = (x:number, y:number, w:number, h:number, color:string):void => {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, w, h);
 };
 
-function drawField(matrix:Array<any>):void {
-  for (let i:number = 0; i < matrix.length; i += 1) {
-    for (let j:number = 0; j < matrix.length; j += 1) {
-      ctx.strokeStyle = "white";
-      ctx.strokeRect(i * grid, j * grid, grid, grid);
-      ctx.font = "12px Ubuntu";
-      // eslint-disable-next-line no-unused-expressions
-      arr[i][j][0] === 10 ? ctx.fillStyle = "blue" : ctx.fillStyle = "red";
-      if (arr[i][j][0] === 10) {
-        rect(i * grid, j * grid, grid, grid, "rgb(0, 153, 0)");
-        ctx.fillStyle = "blue";
-      } else if (arr[i][j][0] === 0) {
-        rect(i * grid, j * grid, grid, grid, "rgb(0, 128, 255)");
-        ctx.fillStyle = "blue";
-      } else if (arr[i][j][0] < 3 && arr[i][j][0] !== 0) {
-        rect(i * grid, j * grid, grid, grid, "rgb(204, 204, 0)");
-        ctx.fillStyle = "white";
-      } else if (arr[i][j][0] > 2 && arr[i][j][0] < 10) {
-        rect(i * grid, j * grid, grid, grid, "rgb(102, 153, 0)");
-        ctx.fillStyle = "white";
-      }
-      ctx.fillText(arr[i][j][0], i * grid + 10, j * grid + 18);
-    }
-  }
+function writeText(i:number, j:number, count:number, listTrb:Array<any>):void {
+  // eslint-disable-next-line prefer-destructuring
+  // ctx.fillStyle = listTrb[count][1];
+  // ctx.fillRect(i * grid, j * grid, grid, grid);
+  ctx.font = "10px Ubuntu";
+  ctx.fillStyle = "white";
+  ctx.fillText(listTrb[count][0], i * grid + 6, j * grid + 30);
 }
-
-drawField(arr);
 
 function countBestFields(matrix:Array<any>):number {
   let count = 0;
@@ -94,7 +55,14 @@ function countBestFields(matrix:Array<any>):number {
   console.log(`Num of tribal in this world ${Math.floor(count / 3)}`);
   return Math.floor(count / 3);
 }
-// countBestFields(arr);
+
+function getTribeFlag():HTMLImageElement {
+  const img = new Image();
+  img.src = "libs/show.svg";
+  return img;
+}
+
+console.log(getTribeFlag());
 
 const allTribes:Array<any> = [];
 function makeAllTribes():void {
@@ -104,27 +72,22 @@ function makeAllTribes():void {
   }
 }
 makeAllTribes();
-function writeText(i:number, j:number, count:number, listTrb:Array<any>):void {
-  // eslint-disable-next-line prefer-destructuring
-  ctx.fillStyle = listTrb[count][1];
-  ctx.fillRect(i * grid, j * grid, grid, grid);
-  ctx.font = "14px Ubuntu";
-  ctx.fillStyle = "white";
-  // ctx.textAlign = "center";
-  ctx.fillText(listTrb[count][1], i * grid + 4, j * grid + 20);
-}
+
 function setTribes():void {
   let count:number = 0;
   let passStep:number = 0;
-  for (let i:number = 2; i < arr.length - 2; i += 1) {
-    for (let j:number = 2; j < arr.length - 2; j += 1) {
+  const img = getTribeFlag();
+  for (let i:number = 0; i < arr.length; i += 1) {
+    for (let j:number = 0; j < arr.length; j += 1) {
       passStep = minmaxRand(0, 1);
       if (arr[i][j][0] > 9 && arr[i][j][1] === 0 && count < allTribes.length && passStep === 0) {
         const tribeList = allTribes[count][1];
         arr[i][j][1] = tribeList;
         allTribes[count][2][0] = i;
         allTribes[count][2][1] = j;
-        rect(i * grid, j * grid, grid, grid, allTribes[count][1]);
+        rect(i * grid, j * grid, grid - 1, grid - 1, allTribes[count][1]);
+        writeText(i, j, count, allTribes);
+        ctx.drawImage(img, i * grid + 5, j * grid, grid - 10, grid - 10);
         count += 1;
       }
     }

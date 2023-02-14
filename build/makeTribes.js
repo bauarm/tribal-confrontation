@@ -1,5 +1,6 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import { minmaxRand, getColor } from "./Helpers.js";
-
 function getPowerTribe(info) {
     let sumPower = 0;
     for (let i = 0; i < info.length; i += 1) {
