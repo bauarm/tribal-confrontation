@@ -104,7 +104,8 @@ function makeAllTribes():void {
   }
 }
 makeAllTribes();
-function writeText(i:number, j:number,count:number, listTrb:Array<any>):void {
+function writeText(i:number, j:number, count:number, listTrb:Array<any>):void {
+  // eslint-disable-next-line prefer-destructuring
   ctx.fillStyle = listTrb[count][1];
   ctx.fillRect(i * grid, j * grid, grid, grid);
   ctx.font = "14px Ubuntu";
