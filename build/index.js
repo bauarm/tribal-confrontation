@@ -6,6 +6,7 @@ import { game, setPaused } from "./Animation.js";
 import { generateTribes } from "./makeTribes.js";
 import generateIsland from "./generateIsland.js";
 import drawIsland from "./drawIsland.js";
+import staticForFieldScores from "./staticForIsland.js";
 // import { makeTime } from "./calendar";
 game();
 (_a = document.querySelector("#pauseBtn")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => setPaused());
@@ -33,7 +34,7 @@ function writeText(i, j, count, listTrb) {
     ctx.fillStyle = "white";
     ctx.fillText(listTrb[count][0], i * grid + 6, j * grid + 30);
 }
-function countBestFields(matrix) {
+function countBestFields(matrix, coef) {
     let count = 0;
     for (let i = 0; i < matrix.length; i += 1) {
         for (let j = 0; j < matrix.length; j += 1) {
@@ -42,19 +43,21 @@ function countBestFields(matrix) {
             }
         }
     }
-    console.log(`Num of best fields ${count}`);
-    console.log(`Num of tribal in this world ${Math.floor(count / 3)}`);
+    console.log(`Num of tribal in this world ${Math.floor(count / coef)}`);
     return Math.floor(count / 3);
 }
+console.log(staticForFieldScores(arr));
+console.log(`Num of best fields ${staticForFieldScores(arr)[10]}`);
+console.log(`Num of worse fields ${staticForFieldScores(arr)[1]}`);
+const numberOftribes = countBestFields(arr, 3);
 function getTribeFlag() {
     const img = new Image();
     img.src = "libs/show.svg";
     return img;
 }
-console.log(getTribeFlag());
 const allTribes = [];
 function makeAllTribes() {
-    const bestFields = countBestFields(arr);
+    const bestFields = numberOftribes;
     for (let i = 0; i < bestFields; i += 1) {
         allTribes.push(generateTribes());
     }
@@ -79,8 +82,8 @@ function setTribes() {
             }
         }
     }
-    console.log(arr);
-    console.log(allTribes);
+    //  console.log(arr);
+    //  console.log(allTribes);
 }
 (_b = document.querySelector("#setTribes")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => setTribes());
 console.log(allTribes);

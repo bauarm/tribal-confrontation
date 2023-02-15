@@ -5,6 +5,7 @@ import { game, setPaused } from "./Animation.js";
 import { generateTribes } from "./makeTribes.js";
 import generateIsland from "./generateIsland.js";
 import drawIsland from "./drawIsland.js";
+import staticForFieldScores from "./staticForIsland.js";
 // import { makeTime } from "./calendar";
 
 game();
@@ -42,7 +43,7 @@ function writeText(i:number, j:number, count:number, listTrb:Array<any>):void {
   ctx.fillText(listTrb[count][0], i * grid + 6, j * grid + 30);
 }
 
-function countBestFields(matrix:Array<any>):number {
+function countBestFields(matrix:Array<any>, coef:number):number {
   let count = 0;
   for (let i:number = 0; i < matrix.length; i += 1) {
     for (let j:number = 0; j < matrix.length; j += 1) {
@@ -51,10 +52,15 @@ function countBestFields(matrix:Array<any>):number {
       }
     }
   }
-  console.log(`Num of best fields ${count}`);
-  console.log(`Num of tribal in this world ${Math.floor(count / 3)}`);
+  console.log(`Num of tribal in this world ${Math.floor(count / coef)}`);
   return Math.floor(count / 3);
 }
+
+console.log(staticForFieldScores(arr));
+console.log(`Num of best fields ${staticForFieldScores(arr)[10]}`);
+console.log(`Num of worse fields ${staticForFieldScores(arr)[1]}`);
+
+const numberOftribes = countBestFields(arr, 3);
 
 function getTribeFlag():HTMLImageElement {
   const img = new Image();
@@ -62,11 +68,9 @@ function getTribeFlag():HTMLImageElement {
   return img;
 }
 
-console.log(getTribeFlag());
-
 const allTribes:Array<any> = [];
 function makeAllTribes():void {
-  const bestFields:number = countBestFields(arr);
+  const bestFields:number = numberOftribes;
   for (let i:number = 0; i < bestFields; i += 1) {
     allTribes.push(generateTribes());
   }
@@ -92,8 +96,8 @@ function setTribes():void {
       }
     }
   }
-  console.log(arr);
-  console.log(allTribes);
+  //  console.log(arr);
+  //  console.log(allTribes);
 }
 document.querySelector("#setTribes")?.addEventListener("click", () => setTribes());
 
