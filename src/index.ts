@@ -2,10 +2,10 @@
 /* eslint-disable import/no-unresolved */
 import { getId, minmaxRand } from "./Helpers.js";
 import { game, setPaused } from "./Animation.js";
-import { generateTribes } from "./makeTribes.js";
 import generateIsland from "./generateIsland.js";
 import drawIsland from "./drawIsland.js";
 import staticForFieldScores from "./staticForIsland.js";
+import generateTribes from "./generateTrabes.js";
 // import { makeTime } from "./calendar";
 
 game();
@@ -36,11 +36,9 @@ const rect = (x:number, y:number, w:number, h:number, color:string):void => {
 
 function writeText(i:number, j:number, count:number, listTrb:Array<any>):void {
   // eslint-disable-next-line prefer-destructuring
-  // ctx.fillStyle = listTrb[count][1];
-  // ctx.fillRect(i * grid, j * grid, grid, grid);
-  ctx.font = "10px Ubuntu";
+  ctx.font = "9px Ubuntu";
   ctx.fillStyle = "white";
-  ctx.fillText(listTrb[count][0], i * grid + 6, j * grid + 30);
+  ctx.fillText(listTrb[count][0], i * grid + 2, j * grid + 28);
 }
 
 function countBestFields(matrix:Array<any>, coef:number):number {
@@ -64,23 +62,15 @@ const numberOftribes = countBestFields(arr, 3);
 
 function getTribeFlag():HTMLImageElement {
   const img = new Image();
-  img.src = "libs/show.svg";
+  img.src = "libs/deers.svg";
   return img;
 }
-
-const allTribes:Array<any> = [];
-function makeAllTribes():void {
-  const bestFields:number = numberOftribes;
-  for (let i:number = 0; i < bestFields; i += 1) {
-    allTribes.push(generateTribes());
-  }
-}
-makeAllTribes();
+const flag = getTribeFlag();
+const allTribes:Array<any> = generateTribes(arr, numberOftribes);
 
 function setTribes():void {
   let count:number = 0;
   let passStep:number = 0;
-  const img = getTribeFlag();
   for (let i:number = 0; i < arr.length; i += 1) {
     for (let j:number = 0; j < arr.length; j += 1) {
       passStep = minmaxRand(0, 1);
@@ -91,14 +81,13 @@ function setTribes():void {
         allTribes[count][2][1] = j;
         rect(i * grid, j * grid, grid - 1, grid - 1, allTribes[count][1]);
         writeText(i, j, count, allTribes);
-        ctx.drawImage(img, i * grid + 5, j * grid, grid - 10, grid - 10);
+        ctx.drawImage(flag, i * grid + 5, j * grid, grid - 10, grid - 10);
         count += 1;
       }
     }
   }
-  //  console.log(arr);
-  //  console.log(allTribes);
 }
+
 document.querySelector("#setTribes")?.addEventListener("click", () => setTribes());
 
 console.log(allTribes);

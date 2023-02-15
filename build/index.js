@@ -3,10 +3,10 @@ var _a, _b;
 /* eslint-disable import/no-unresolved */
 import { getId, minmaxRand } from "./Helpers.js";
 import { game, setPaused } from "./Animation.js";
-import { generateTribes } from "./makeTribes.js";
 import generateIsland from "./generateIsland.js";
 import drawIsland from "./drawIsland.js";
 import staticForFieldScores from "./staticForIsland.js";
+import generateTribes from "./generateTrabes.js";
 // import { makeTime } from "./calendar";
 game();
 (_a = document.querySelector("#pauseBtn")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => setPaused());
@@ -28,11 +28,9 @@ const rect = (x, y, w, h, color) => {
 };
 function writeText(i, j, count, listTrb) {
     // eslint-disable-next-line prefer-destructuring
-    // ctx.fillStyle = listTrb[count][1];
-    // ctx.fillRect(i * grid, j * grid, grid, grid);
-    ctx.font = "10px Ubuntu";
+    ctx.font = "9px Ubuntu";
     ctx.fillStyle = "white";
-    ctx.fillText(listTrb[count][0], i * grid + 6, j * grid + 30);
+    ctx.fillText(listTrb[count][0], i * grid + 2, j * grid + 28);
 }
 function countBestFields(matrix, coef) {
     let count = 0;
@@ -52,21 +50,14 @@ console.log(`Num of worse fields ${staticForFieldScores(arr)[1]}`);
 const numberOftribes = countBestFields(arr, 3);
 function getTribeFlag() {
     const img = new Image();
-    img.src = "libs/show.svg";
+    img.src = "libs/deers.svg";
     return img;
 }
-const allTribes = [];
-function makeAllTribes() {
-    const bestFields = numberOftribes;
-    for (let i = 0; i < bestFields; i += 1) {
-        allTribes.push(generateTribes());
-    }
-}
-makeAllTribes();
+const flag = getTribeFlag();
+const allTribes = generateTribes(arr, numberOftribes);
 function setTribes() {
     let count = 0;
     let passStep = 0;
-    const img = getTribeFlag();
     for (let i = 0; i < arr.length; i += 1) {
         for (let j = 0; j < arr.length; j += 1) {
             passStep = minmaxRand(0, 1);
@@ -77,13 +68,11 @@ function setTribes() {
                 allTribes[count][2][1] = j;
                 rect(i * grid, j * grid, grid - 1, grid - 1, allTribes[count][1]);
                 writeText(i, j, count, allTribes);
-                ctx.drawImage(img, i * grid + 5, j * grid, grid - 10, grid - 10);
+                ctx.drawImage(flag, i * grid + 5, j * grid, grid - 10, grid - 10);
                 count += 1;
             }
         }
     }
-    //  console.log(arr);
-    //  console.log(allTribes);
 }
 (_b = document.querySelector("#setTribes")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => setTribes());
 console.log(allTribes);
