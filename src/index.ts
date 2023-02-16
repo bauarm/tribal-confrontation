@@ -90,29 +90,5 @@ function setTribes():void {
 
 document.querySelector("#setTribes")?.addEventListener("click", () => setTribes());
 
-function getMatrixArea(matrix:Array<any>, x:number, y:number, size:number, color:string):void {
-  for (let i:number = x; i < x + size; i += 1) {
-    for (let j:number = y; j < y + size; j += 1) {
-      // eslint-disable-next-line no-param-reassign
-      if (matrix[i][j][0] !== 0) {
-        // eslint-disable-next-line no-param-reassign
-        matrix[i][j][0] = 11;
-        rect(i * grid, j * grid, grid - 1, grid - 1, color);
-        console.log(matrix[i][j][0]);
-      }
-    }
-  }
-}
-
-function generateRegions(scale:number = 17):void {
-  const regionSize:number = Math.floor(scale / 2);
-  const colors = ["black", "blue", "green", "white"];
-  const steps = [[0, 0], [regionSize, 0], [0, regionSize], [regionSize, regionSize]];
-  for (let i:number = 0; i < 4; i += 1) {
-    getMatrixArea(arr, steps[i][0], steps[i][1], regionSize, colors[i]);
-  }
-}
-generateRegions(sizeField);
-// getMatrixArea(arr, 9, 0, 9, "black");
-console.log(allTribes);
-console.log(arr);
+// console.log(allTribes);
+// console.log(arr);

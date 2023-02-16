@@ -75,28 +75,5 @@ function setTribes() {
     }
 }
 (_b = document.querySelector("#setTribes")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => setTribes());
-function getMatrixArea(matrix, x, y, size, color) {
-    for (let i = x; i < x + size; i += 1) {
-        for (let j = y; j < y + size; j += 1) {
-            // eslint-disable-next-line no-param-reassign
-            if (matrix[i][j][0] !== 0) {
-                // eslint-disable-next-line no-param-reassign
-                matrix[i][j][0] = 11;
-                rect(i * grid, j * grid, grid - 1, grid - 1, color);
-                console.log(matrix[i][j][0]);
-            }
-        }
-    }
-}
-function generateRegions(scale = 17) {
-    const regionSize = Math.floor(scale / 2);
-    const colors = ["black", "blue", "green", "white"];
-    const steps = [[0, 0], [regionSize, 0], [0, regionSize], [regionSize, regionSize]];
-    for (let i = 0; i < 4; i += 1) {
-        getMatrixArea(arr, steps[i][0], steps[i][1], regionSize, colors[i]);
-    }
-}
-generateRegions(sizeField);
-// getMatrixArea(arr, 9, 0, 9, "black");
-console.log(allTribes);
-console.log(arr);
+// console.log(allTribes);
+// console.log(arr);

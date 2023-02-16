@@ -12,7 +12,7 @@ function fillArrWorld(scale:number = 17):Array<any> {
   }
   return arr;
 }
-
+//  функция будет только рисовать остров переделать
 function makeGround(scale:number = 17):Array<any> {
   const arr:Array<any> = fillArrWorld(scale);
   for (let i:number = 1; i < scale - 1; i += 1) {
@@ -29,6 +29,28 @@ function makeGround(scale:number = 17):Array<any> {
   return arr;
 }
 
+function getMatrixArea(matrix:Array<any>, x:number, y:number, size:number):void {
+  for (let i:number = x; i < x + size; i += 1) {
+    for (let j:number = y; j < y + size; j += 1) {
+      // eslint-disable-next-line no-param-reassign
+      if (matrix[i][j][0] !== 0) {
+        // eslint-disable-next-line no-param-reassign
+        matrix[i][j][0] = minmaxRand(1, 10);
+      }
+    }
+  }
+}
+
+function generateRegions(scale:number = 17):Array<any> {
+  const matrix = makeGround(scale);
+  const regionSize:number = Math.floor(scale / 2);
+  const steps = [[0, 0], [regionSize, 0], [0, regionSize], [regionSize, regionSize]];
+  for (let i:number = 0; i < 4; i += 1) {
+    getMatrixArea(matrix, steps[i][0], steps[i][1], regionSize);
+  }
+  return matrix;
+}
+
 export default function generateIsland(scale:number) {
-  return makeGround(scale);
+  return generateRegions(scale);
 }
