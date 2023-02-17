@@ -38,6 +38,15 @@ function getMatrixArea(matrix, x, y, size) {
         }
     }
 }
+function setAreasQuality(matrix, score, quantity) {
+    for (let i = 0; i < matrix.length; i += 1) {
+        for (let j = 0; j < matrix.length; j += 1) {
+            if (matrix[i][j][0] !== 0) {
+                matrix[i][j][0] = minmaxRand(1, 10);
+            }
+        }
+    }
+}
 function generateRegions(scale = 17) {
     const matrix = makeGround(scale);
     const regionSize = Math.floor(scale / 2);

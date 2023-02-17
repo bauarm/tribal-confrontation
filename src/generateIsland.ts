@@ -41,6 +41,16 @@ function getMatrixArea(matrix:Array<any>, x:number, y:number, size:number):void 
   }
 }
 
+function setAreasQuality(matrix:Array<any>, score:number, quantity:number):void {
+  for (let i:number = 0; i < matrix.length; i += 1) {
+    for (let j:number = 0; j < matrix.length; j += 1) {
+      if (matrix[i][j][0] !== 0) {
+        matrix[i][j][0] = minmaxRand(1, 10);
+      }
+    }
+  }
+}
+
 function generateRegions(scale:number = 17):Array<any> {
   const matrix = makeGround(scale);
   const regionSize:number = Math.floor(scale / 2);

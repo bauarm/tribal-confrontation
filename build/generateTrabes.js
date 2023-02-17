@@ -3,7 +3,7 @@
 import { minmaxRand } from "./Helpers.js";
 const allTribesColor = [[255, 0, 0], [139, 0, 0], [199, 21, 133], [255, 69, 0], [139, 69, 19],
     [102, 51, 153], [255, 0, 255], [25, 25, 112], [47, 79, 79], [0, 100, 0]];
-const allTotemNames = ["bears", "beavers", "boars", "deers", "fishes", "foxes", "horses", "hares", "ravens", "swifts", "wolfes"];
+const allTotemNames = ["bears", "beavers", "boars", "deers", "fishes", "foxes", "horses", "hares", "ravens", "swifts", "wolfes", "fogs", "shakes"];
 function getTribeAttributtes(atributes, numOftribes) {
     const trabesAttr = [];
     while (trabesAttr.length < numOftribes) {

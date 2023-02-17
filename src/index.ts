@@ -14,7 +14,7 @@ document.querySelector("#pauseBtn")?.addEventListener("click", () => setPaused()
 const canvas = getId("canvas");
 
 const grid:number = 32;
-const sizeField:number = 20;
+const sizeField:number = 16;
 
 const sizeSceneX:number = grid * sizeField;
 const sizeSceneY:number = grid * sizeField;
@@ -88,7 +88,18 @@ function setTribes():void {
   }
 }
 
+function mapMatrix(matrix:Array<any>, pos:number, callback:any) {
+  // const newArray:any = matrix;
+  for (let i:number = 0; i < matrix.length; i += 1) {
+    for (let j:number = 0; j < matrix.length; j += 1) {
+      // eslint-disable-next-line no-param-reassign
+      matrix[i][j][pos] = (callback(matrix[i][j][pos]));
+    }
+  }
+}
+mapMatrix(arr, 0, (item: number) => item + 100);
+
 document.querySelector("#setTribes")?.addEventListener("click", () => setTribes());
 
 // console.log(allTribes);
-// console.log(arr);
+console.log(arr);
