@@ -27,7 +27,7 @@ function drawField(matrix) {
                 rect(i * grid, j * grid, grid, grid, "rgb(0, 153, 0)");
                 ctx.fillStyle = "blue";
             }
-            else if (matrix[i][j][0] === 0) {
+            else if (matrix[i][j][0] === -1) {
                 rect(i * grid, j * grid, grid, grid, "rgb(0, 128, 255)");
                 ctx.fillStyle = "blue";
             }

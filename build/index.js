@@ -74,41 +74,6 @@ function setTribes() {
         }
     }
 }
-function mapMatrix(matrix, pos, callback) {
-    // const newArray:any = matrix;
-    for (let i = 0; i < matrix.length; i += 1) {
-        for (let j = 0; j < matrix.length; j += 1) {
-            // eslint-disable-next-line no-param-reassign
-            matrix[i][j][pos] = (callback(matrix[i][j][pos]));
-        }
-    }
-}
-// mapMatrix(arr, 0, (item: number) => item + 100);
-/**
- * @param condition Score wanted area
- */
-// eslint-disable-next-line max-len
-function mapFilterMatrix(matrix, pos, condition, mark, callback) {
-    for (let i = 0; i < matrix.length; i += 1) {
-        for (let j = 0; j < matrix.length; j += 1) {
-            if (mark) {
-                if (matrix[i][j][pos] === condition) {
-                    console.log("mark");
-                    // eslint-disable-next-line no-param-reassign
-                    matrix[i][j][pos] = (callback(matrix[i][j][pos]));
-                }
-            }
-            if (!mark) {
-                if (matrix[i][j][pos] !== condition) {
-                    console.log("nomark");
-                    // eslint-disable-next-line no-param-reassign
-                    matrix[i][j][pos] = (callback(matrix[i][j][pos]));
-                }
-            }
-        }
-    }
-}
-mapFilterMatrix(arr, 0, 0, true, (item) => item + 100);
 (_b = document.querySelector("#setTribes")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => setTribes());
 // console.log(allTribes);
-console.log(arr);
+// console.log(arr);

@@ -1,6 +1,7 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 import { getId, minmaxRand } from "./Helpers.js";
+
 const canvas = getId("canvas");
 const grid = 32;
 const sizeField = 17;
