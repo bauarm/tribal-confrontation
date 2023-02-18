@@ -74,6 +74,46 @@ function setTribes() {
         }
     }
 }
+function getMatrixArea(matrix, x, y, size) {
+    const newArray = [];
+    for (let i = x; i < x + size; i += 1) {
+        newArray.push([]);
+        for (let j = y; j < y + size; j += 1) {
+            newArray[i].push(matrix[i][j]);
+        }
+    }
+    return newArray;
+}
+const arrFrag = getMatrixArea(arr, 0, 0, 8);
+function setAreasQuality(matrix, score, quantity) {
+    const newArray = matrix;
+    let qnt = quantity;
+    while (qnt > 0) {
+        for (let i = 0; i < matrix.length; i += 1) {
+            for (let j = 0; j < matrix.length; j += 1) {
+                const passStep = minmaxRand(0, 5);
+                if (matrix[i][j][0] >= 0 && passStep === 3 && qnt > 0) {
+                    newArray[i][j][0] = score;
+                    qnt -= 1;
+                    console.log(qnt);
+                }
+            }
+        }
+    }
+    return newArray;
+}
+const arrFrag2 = setAreasQuality(arrFrag, 100, 3);
+// eslint-disable-next-line max-len
+function setMatrixArea(matrix, NewMatrix, x, y, size) {
+    for (let i = x; i < x + size; i += 1) {
+        for (let j = y; j < y + size; j += 1) {
+            // eslint-disable-next-line prefer-destructuring, no-param-reassign
+            matrix[i][j][0] = NewMatrix[i][j][0];
+        }
+    }
+}
+setMatrixArea(arr, arrFrag2, 0, 0, 8);
 (_b = document.querySelector("#setTribes")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => setTribes());
 // console.log(allTribes);
-// console.log(arr);
+console.log(arrFrag2);
+console.log(arr);
