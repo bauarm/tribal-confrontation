@@ -88,53 +88,7 @@ function setTribes():void {
   }
 }
 
-function getMatrixArea(matrix:Array<any>, x:number, y:number, size:number):Array<any> {
-  const newArray:Array<any> = [];
-  for (let i:number = x; i < x + size; i += 1) {
-    newArray.push([]);
-    for (let j:number = y; j < y + size; j += 1) {
-      newArray[i].push(matrix[i][j]);
-    }
-  }
-  return newArray;
-}
-
-const arrFrag = getMatrixArea(arr, 0, 0, 8);
-
-function setAreasQuality(matrix:Array<any>, score:number, quantity:number):Array<any> {
-  const newArray:Array<any> = matrix;
-  let qnt:number = quantity;
-  while (qnt > 0) {
-    for (let i:number = 0; i < matrix.length; i += 1) {
-      for (let j:number = 0; j < matrix.length; j += 1) {
-        const passStep = minmaxRand(0, 5);
-        if (matrix[i][j][0] >= 0 && passStep === 3 && qnt > 0) {
-          newArray[i][j][0] = score;
-          qnt -= 1;
-          console.log(qnt);
-        }
-      }
-    }
-  }
-  return newArray;
-}
-
-const arrFrag2 = setAreasQuality(arrFrag, 100, 3);
-
-// eslint-disable-next-line max-len
-function setMatrixArea(matrix:Array<any>, NewMatrix:Array<any>, x:number, y:number, size:number):void {
-  for (let i:number = x; i < x + size; i += 1) {
-    for (let j:number = y; j < y + size; j += 1) {
-      // eslint-disable-next-line prefer-destructuring, no-param-reassign
-      matrix[i][j][0] = NewMatrix[i][j][0];
-    }
-  }
-}
-
-setMatrixArea(arr, arrFrag2, 0, 0, 8);
-
 document.querySelector("#setTribes")?.addEventListener("click", () => setTribes());
 
 // console.log(allTribes);
-console.log(arrFrag2);
-console.log(arr);
+// console.log(arr);

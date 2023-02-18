@@ -11,6 +11,18 @@ function fillArrWorld(scale = 16) {
     }
     return arr;
 }
+function setRandomScoreForAllArea(matrix) {
+    const newArray = matrix;
+    const len = newArray.length;
+    for (let i = 0; i < len; i += 1) {
+        for (let j = 0; j < len; j += 1) {
+            if (matrix[i][j][0] === 0) {
+                newArray[i][j][0] = minmaxRand(1, 9);
+            }
+        }
+    }
+    return newArray;
+}
 function makeGround(scale = 16) {
     const arr = fillArrWorld(scale);
     for (let i = 1; i < scale - 1; i += 1) {
@@ -27,27 +39,55 @@ function makeGround(scale = 16) {
         if (passStep === 1)
             arr[q][scale - 2][0] = -1;
     }
-    return arr;
+    const finalArr = setRandomScoreForAllArea(arr);
+    return finalArr;
 }
 function getMatrixArea(matrix, x, y, size) {
+    const newArray = [];
+    let cnt = 0;
     for (let i = x; i < x + size; i += 1) {
+        newArray.push([]);
         for (let j = y; j < y + size; j += 1) {
-            if (matrix[i][j][0] === 0) {
-                // eslint-disable-next-line no-param-reassign
-                matrix[i][j][0] = minmaxRand(1, 10);
-            }
+            newArray[cnt].push(matrix[i][j]);
         }
+        cnt += 1;
     }
+    return newArray;
 }
+// const arrFrag = getMatrixArea(arr, 0, 0, 8);
 function setAreasQuality(matrix, score, quantity) {
-    for (let i = 0; i < matrix.length; i += 1) {
-        for (let j = 0; j < matrix.length; j += 1) {
-            if (matrix[i][j][0] >= 0) {
-                matrix[i][j][0] = minmaxRand(1, 10);
+    const newArray = matrix;
+    let qnt = quantity;
+    while (qnt > 0) {
+        for (let i = 0; i < matrix.length; i += 1) {
+            for (let j = 0; j < matrix.length; j += 1) {
+                const passStep = minmaxRand(0, 5);
+                if (matrix[i][j][0] >= 0 && passStep === 3 && qnt > 0) {
+                    newArray[i][j][0] = score;
+                    qnt -= 1;
+                }
             }
         }
     }
+    return newArray;
 }
+// const arrFrag2 = setAreasQuality(arrFrag, 100, 3);
+// eslint-disable-next-line max-len
+function setMatrixArea(matrix, NewMatrix, x, y, size) {
+    let row = 0;
+    let col;
+    for (let i = x; i < x + size; i += 1) {
+        col = 0;
+        for (let j = y; j < y + size; j += 1) {
+            // eslint-disable-next-line prefer-destructuring, no-param-reassign
+            matrix[i][j][0] = NewMatrix[row][col][0];
+            col += 1;
+        }
+        row += 1;
+    }
+}
+// setMatrixArea(arr, arrFrag2, 0, 0, 8);
+// eslint-disable-next-line no-unused-vars
 function mapMatrix(matrix, pos, callback) {
     // const newArray:any = matrix;
     for (let i = 0; i < matrix.length; i += 1) {
@@ -62,19 +102,18 @@ function mapMatrix(matrix, pos, callback) {
 * @param score Score wanted area
 * @param mark Include or exclude area with score argue from selection
 */
+// eslint-disable-next-line no-unused-vars
 function mapFilterMatrix(matrix, pos, score, mark, callback) {
     for (let i = 0; i < matrix.length; i += 1) {
         for (let j = 0; j < matrix.length; j += 1) {
             if (mark) {
                 if (matrix[i][j][pos] === score) {
-                    console.log("mark");
                     // eslint-disable-next-line no-param-reassign
                     matrix[i][j][pos] = (callback(matrix[i][j][pos]));
                 }
             }
             if (!mark) {
                 if (matrix[i][j][pos] !== score) {
-                    console.log("nomark");
                     // eslint-disable-next-line no-param-reassign
                     matrix[i][j][pos] = (callback(matrix[i][j][pos]));
                 }
@@ -88,7 +127,9 @@ function generateRegions(scale = 17) {
     const regionSize = Math.floor(scale / 2);
     const steps = [[0, 0], [regionSize, 0], [0, regionSize], [regionSize, regionSize]];
     for (let i = 0; i < 4; i += 1) {
-        getMatrixArea(matrix, steps[i][0], steps[i][1], regionSize);
+        const EmptyQuartArr = getMatrixArea(matrix, steps[i][0], steps[i][1], regionSize);
+        const FullQuartArr = setAreasQuality(EmptyQuartArr, 10, 3);
+        setMatrixArea(matrix, FullQuartArr, steps[i][0], steps[i][1], regionSize);
     }
     return matrix;
 }
