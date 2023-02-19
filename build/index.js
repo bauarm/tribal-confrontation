@@ -55,6 +55,7 @@ function getTribeFlag() {
 }
 const flag = getTribeFlag();
 const allTribes = generateTribes(arr, numberOftribes);
+console.log(allTribes);
 function setTribes() {
     let count = 0;
     let passStep = 0;
@@ -74,6 +75,26 @@ function setTribes() {
         }
     }
 }
+function getImg(name) {
+    const img = new Image();
+    const arrImg = [];
+    img.src = `accets/${name}.svg`;
+    console.log();
+    arrImg.push(name);
+    arrImg.push(img);
+    console.log(arrImg);
+    return arrImg;
+}
+function getFlagsForAll(nameArr) {
+    const imgArr = [];
+    let imgName;
+    for (let i = 0; i < nameArr.length; i += 1) {
+        imgName = getImg(nameArr[i]);
+        imgArr.push(imgName);
+    }
+    return imgArr;
+}
+const imgW = getFlagsForAll(["bears", "beavers", "boars", "deers", "fishes", "foxes", "horses", "hares", "ravens", "swifts", "wolfes"]);
 (_b = document.querySelector("#setTribes")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => setTribes());
 // console.log(allTribes);
-// console.log(arr);
+console.log(imgW);

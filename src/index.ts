@@ -67,6 +67,7 @@ function getTribeFlag():HTMLImageElement {
 }
 const flag = getTribeFlag();
 const allTribes:Array<any> = generateTribes(arr, numberOftribes);
+console.log(allTribes);
 
 function setTribes():void {
   let count:number = 0;
@@ -88,7 +89,30 @@ function setTribes():void {
   }
 }
 
+function getImg(name:string):Array<any> {
+  const img = new Image();
+  const arrImg:Array<any> = [];
+  img.src = `accets/${name}.svg`;
+  console.log();
+  arrImg.push(name);
+  arrImg.push(img);
+  console.log(arrImg);
+  return arrImg;
+}
+
+function getFlagsForAll(nameArr:Array<any>):Array<any> {
+  const imgArr:Array<any> = [];
+  let imgName:Array<any>;
+  for (let i:number = 0; i < nameArr.length; i += 1) {
+    imgName = getImg(nameArr[i]);
+    imgArr.push(imgName);
+  }
+  return imgArr;
+}
+
+const imgW = getFlagsForAll(["bears", "beavers", "boars", "deers", "fishes", "foxes", "horses", "hares", "ravens", "swifts", "wolfes"]);
+
 document.querySelector("#setTribes")?.addEventListener("click", () => setTribes());
 
 // console.log(allTribes);
-// console.log(arr);
+console.log(imgW);
