@@ -48,12 +48,6 @@ console.log(staticForFieldScores(arr));
 console.log(`Num of best fields ${staticForFieldScores(arr)[10]}`);
 console.log(`Num of worse fields ${staticForFieldScores(arr)[1]}`);
 const numberOftribes = countBestFields(arr, 3);
-function getTribeFlag() {
-    const img = new Image();
-    img.src = "libs/deers.svg";
-    return img;
-}
-const flag = getTribeFlag();
 const allTribes = generateTribes(arr, numberOftribes);
 console.log(allTribes);
 function setTribes() {
@@ -69,32 +63,11 @@ function setTribes() {
                 allTribes[count][2][1] = j;
                 rect(i * grid, j * grid, grid - 1, grid - 1, allTribes[count][1]);
                 writeText(i, j, count, allTribes);
-                ctx.drawImage(flag, i * grid + 5, j * grid, grid - 10, grid - 10);
+                ctx.drawImage(allTribes[count][3], i * grid + 5, j * grid, grid - 10, grid - 10);
                 count += 1;
             }
         }
     }
 }
-function getImg(name) {
-    const img = new Image();
-    const arrImg = [];
-    img.src = `accets/${name}.svg`;
-    console.log();
-    arrImg.push(name);
-    arrImg.push(img);
-    console.log(arrImg);
-    return arrImg;
-}
-function getFlagsForAll(nameArr) {
-    const imgArr = [];
-    let imgName;
-    for (let i = 0; i < nameArr.length; i += 1) {
-        imgName = getImg(nameArr[i]);
-        imgArr.push(imgName);
-    }
-    return imgArr;
-}
-const imgW = getFlagsForAll(["bears", "beavers", "boars", "deers", "fishes", "foxes", "horses", "hares", "ravens", "swifts", "wolfes"]);
 (_b = document.querySelector("#setTribes")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => setTribes());
 // console.log(allTribes);
-console.log(imgW);
