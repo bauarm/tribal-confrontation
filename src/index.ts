@@ -41,25 +41,11 @@ function writeText(i:number, j:number, count:number, listTrb:Array<any>):void {
   ctx.fillText(listTrb[count][0], i * grid + 2, j * grid + 28);
 }
 
-function countBestFields(matrix:Array<any>, coef:number):number {
-  let count = 0;
-  for (let i:number = 0; i < matrix.length; i += 1) {
-    for (let j:number = 0; j < matrix.length; j += 1) {
-      if (arr[i][j][0] === 10) {
-        count += 1;
-      }
-    }
-  }
-  console.log(`Num of tribal in this world ${Math.floor(count / coef)}`);
-  return Math.floor(count / 3);
-}
-
 console.log(staticForFieldScores(arr));
 console.log(`Num of best fields ${staticForFieldScores(arr)[10]}`);
 console.log(`Num of worse fields ${staticForFieldScores(arr)[1]}`);
 
-const numberOftribes = countBestFields(arr, 3);
-
+const numberOftribes = 8;
 const allTribes:Array<any> = generateTribes(arr, numberOftribes);
 console.log(allTribes);
 
