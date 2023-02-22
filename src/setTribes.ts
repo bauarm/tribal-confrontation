@@ -43,12 +43,17 @@ function setRegionWithTrabes(regionArr:Array<any>, regTribes:Array<any>, x:numbe
   }
 }
 
-// eslint-disable-next-line max-len
-export default function generateRegions(islandArr:Array<any>, tribesArr:Array<any>, scale:number = 16):Array<any> {
-  const islndArr:Array<any> = islandArr;
-  const regionSize:number = Math.floor(scale / 2);
+interface setTrabes {
+  islandArr:Array<any>;
+  tribesArr:Array<any>;
+  scale:number;
+}
+
+export default function generateRegions(trabesAttr: setTrabes):Array<any> {
+  const islndArr:Array<any> = trabesAttr.islandArr;
+  const regionSize:number = Math.floor(trabesAttr.scale / 2);
   const steps = [[0, 0], [regionSize, 0], [0, regionSize], [regionSize, regionSize]];
-  const trbArr:Array<any> = tribesArr;
+  const trbArr:Array<any> = trabesAttr.tribesArr;
   let chankLimiter:number = 0;
   for (let i:number = 0; i < 4; i += 1) {
     const tribesChank = trbArr.slice(chankLimiter, chankLimiter + 2);
