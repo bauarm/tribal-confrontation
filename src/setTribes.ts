@@ -11,8 +11,8 @@ export default function setTribes(islandArr:Array<any>, allTribesArr:Array<any>)
     for (let j:number = 0; j < arr.length; j += 1) {
       passStep = minmaxRand(0, 1);
       if (arr[i][j][0] > 9 && arr[i][j][1] === 0 && count < allTribes.length && passStep === 0) {
-        const tribeList = allTribes[count][1];
-        arr[i][j][1] = tribeList;
+        const tribeName = allTribes[count][0];
+        arr[i][j][1] = tribeName;
         allTribes[count][2][0] = i;
         allTribes[count][2][1] = j;
         count += 1;
