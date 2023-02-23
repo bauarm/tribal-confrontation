@@ -1,5 +1,4 @@
 var _a, _b;
-/* eslint-disable max-len */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 import { getId, minmaxRand } from "./Helpers.js";
@@ -8,7 +7,8 @@ import generateIsland from "./generateIsland.js";
 import drawIsland from "./drawIsland.js";
 import staticForFieldScores from "./staticForIsland.js";
 import generateTribes from "./generateTrabes.js";
-// import { makeTime } from "./calendar";
+import generateIslandWithTribes from "./setTribes.js";
+import drawFirstTribes from "./drawTribes.js";
 game();
 (_a = document.querySelector("#pauseBtn")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => setPaused());
 const canvas = getId("canvas");
@@ -38,6 +38,14 @@ console.log(`Num of worse fields ${staticForFieldScores(arr)[1]}`);
 const numberOftribes = 8;
 const allTribes = generateTribes(arr, numberOftribes);
 console.log(allTribes);
+const setTribesAttr = {
+    islandArr: arr,
+    tribesArr: allTribes,
+    scale: sizeField,
+};
+const islandWithFirstTribes = generateIslandWithTribes(setTribesAttr);
+console.log("isl", islandWithFirstTribes);
+drawFirstTribes(islandWithFirstTribes, allTribes);
 function setTribes() {
     let count = 0;
     let passStep = 0;

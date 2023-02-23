@@ -40,7 +40,7 @@ function setRegionWithTrabes(regionArr, regTribes, x, y, size) {
         row += 1;
     }
 }
-export default function generateRegions(trabesAttr) {
+export default function generateIslandWithTribes(trabesAttr) {
     const islndArr = trabesAttr.islandArr;
     const regionSize = Math.floor(trabesAttr.scale / 2);
     const steps = [[0, 0], [regionSize, 0], [0, regionSize], [regionSize, regionSize]];
@@ -53,6 +53,5 @@ export default function generateRegions(trabesAttr) {
         setRegionWithTrabes(islndArr, arrRegWithTribes, steps[i][0], steps[i][1], regionSize);
         chankLimiter += 2;
     }
-    console.log(islndArr);
     return islndArr;
 }

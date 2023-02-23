@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 import { getId, minmaxRand } from "./Helpers.js";
@@ -7,7 +6,8 @@ import generateIsland from "./generateIsland.js";
 import drawIsland from "./drawIsland.js";
 import staticForFieldScores from "./staticForIsland.js";
 import generateTribes from "./generateTrabes.js";
-// import { makeTime } from "./calendar";
+import generateIslandWithTribes from "./setTribes.js";
+import drawFirstTribes from "./drawTribes.js";
 
 game();
 document.querySelector("#pauseBtn")?.addEventListener("click", () => setPaused());
@@ -48,6 +48,17 @@ console.log(`Num of worse fields ${staticForFieldScores(arr)[1]}`);
 const numberOftribes = 8;
 const allTribes:Array<any> = generateTribes(arr, numberOftribes);
 console.log(allTribes);
+
+const setTribesAttr = {
+  islandArr: arr,
+  tribesArr: allTribes,
+  scale: sizeField,
+};
+
+const islandWithFirstTribes = generateIslandWithTribes(setTribesAttr);
+console.log("isl", islandWithFirstTribes);
+
+drawFirstTribes(islandWithFirstTribes, allTribes);
 
 function setTribes():void {
   let count:number = 0;

@@ -49,7 +49,7 @@ interface setTrabes {
   scale:number;
 }
 
-export default function generateRegions(trabesAttr: setTrabes):Array<any> {
+export default function generateIslandWithTribes(trabesAttr: setTrabes):Array<any> {
   const islndArr:Array<any> = trabesAttr.islandArr;
   const regionSize:number = Math.floor(trabesAttr.scale / 2);
   const steps = [[0, 0], [regionSize, 0], [0, regionSize], [regionSize, regionSize]];
@@ -62,6 +62,5 @@ export default function generateRegions(trabesAttr: setTrabes):Array<any> {
     setRegionWithTrabes(islndArr, arrRegWithTribes, steps[i][0], steps[i][1], regionSize);
     chankLimiter += 2;
   }
-  console.log(islndArr);
   return islndArr;
 }
