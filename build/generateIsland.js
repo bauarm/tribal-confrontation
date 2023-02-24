@@ -60,7 +60,7 @@ function setAreasQuality(matrix, score, quantity) {
     while (qnt > 0) {
         for (let i = 0; i < matrix.length; i += 1) {
             for (let j = 0; j < matrix.length; j += 1) {
-                const passStep = minmaxRand(0, 5);
+                const passStep = minmaxRand(0, 7);
                 if (matrix[i][j][0] >= 0 && passStep === 3 && qnt > 0) {
                     newArray[i][j][0] = score;
                     qnt -= 1;
@@ -91,7 +91,7 @@ function generateRegions(scale = 17) {
     const steps = [[0, 0], [regionSize, 0], [0, regionSize], [regionSize, regionSize]];
     for (let i = 0; i < 4; i += 1) {
         const EmptyQuartArr = getMatrixArea(matrix, steps[i][0], steps[i][1], regionSize);
-        const FullQuartArr = setAreasQuality(EmptyQuartArr, 10, 3);
+        const FullQuartArr = setAreasQuality(EmptyQuartArr, 10, 2);
         setMatrixArea(matrix, FullQuartArr, steps[i][0], steps[i][1], regionSize);
     }
     return matrix;

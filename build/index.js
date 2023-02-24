@@ -1,7 +1,7 @@
-var _a, _b;
+var _a;
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
-import { getId, minmaxRand } from "./Helpers.js";
+import { getId } from "./Helpers.js";
 import { game, setPaused } from "./Animation.js";
 import generateIsland from "./generateIsland.js";
 import drawIsland from "./drawIsland.js";
@@ -23,15 +23,6 @@ ctx.fillStyle = "rgb(128, 128, 0)";
 ctx.fillRect(0, 0, sizeSceneX, sizeSceneY);
 const arr = generateIsland(sizeField);
 drawIsland(arr);
-const rect = (x, y, w, h, color) => {
-    ctx.fillStyle = color;
-    ctx.fillRect(x, y, w, h);
-};
-function writeText(i, j, count, listTrb) {
-    ctx.font = "9px Ubuntu";
-    ctx.fillStyle = "white";
-    ctx.fillText(listTrb[count][0], i * grid + 2, j * grid + 28);
-}
 console.log(staticForFieldScores(arr));
 console.log(`Num of best fields ${staticForFieldScores(arr)[10]}`);
 console.log(`Num of worse fields ${staticForFieldScores(arr)[1]}`);
@@ -46,25 +37,15 @@ const setTribesAttr = {
 const islandWithFirstTribes = generateIslandWithTribes(setTribesAttr);
 console.log("isl", islandWithFirstTribes);
 drawFirstTribes(islandWithFirstTribes, allTribes);
-function setTribes() {
-    let count = 0;
-    let passStep = 0;
-    for (let i = 0; i < arr.length; i += 1) {
-        for (let j = 0; j < arr.length; j += 1) {
-            passStep = minmaxRand(0, 1);
-            if (arr[i][j][0] > 9 && arr[i][j][1] === 0 && count < allTribes.length && passStep === 0) {
-                const tribeList = allTribes[count][0];
-                arr[i][j][1] = tribeList;
-                allTribes[count][2][0] = i;
-                allTribes[count][2][1] = j;
-                rect(i * grid, j * grid, grid - 1, grid - 1, allTribes[count][1]);
-                writeText(i, j, count, allTribes);
-                ctx.drawImage(allTribes[count][3], i * grid + 5, j * grid, grid - 10, grid - 10);
-                count += 1;
-            }
+function tribesArrToObj(tribArr) {
+    const tribes = {};
+    for (let i = 0; i < tribArr.length; i += 1) {
+        console.log(tribArr[i]);
+        for (let j = 0; j < tribArr[i].length; j += 1) {
+            console.log(tribArr[i][j]);
         }
     }
-    console.log(arr);
 }
-(_b = document.querySelector("#setTribes")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => setTribes());
+// tribesArrToObj(allTribes);
+// document.querySelector("#setTribes")?.addEventListener("click", () => setTribes());
 // console.log(allTribes);

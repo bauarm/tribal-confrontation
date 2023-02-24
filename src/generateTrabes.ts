@@ -57,17 +57,17 @@ function setFlagsForName(nameArr:Array<string>, flagsImg:Array<any>):Array<any> 
 }
 
 export default function generateTrabes(matrix:Array<any>, numOftribes:number):Array<any> {
-  const tribal:Array<any> = [];
+  const tribals:Array<any> = [];
   const tribesColor:Array<any> = getTribeAttributtes(allTribesColor, numOftribes);
   const tribesTotemNames:Array<string> = getTribeAttributtes(allTotemNames, numOftribes);
   const allFlags = getFlagsForAll(allTotemNames);
   const changeFlags = (setFlagsForName(tribesTotemNames, allFlags));
   for (let i:number = 0; i < numOftribes; i += 1) {
-    tribal.push([]);
-    tribal[i].push(tribesTotemNames[i]);
-    tribal[i].push(formRgbaString(tribesColor[i]));
-    tribal[i].push([0, 0]);
-    tribal[i].push(changeFlags[i]);
+    tribals.push([]);
+    tribals[i].push(tribesTotemNames[i]);
+    tribals[i].push(formRgbaString(tribesColor[i]));
+    tribals[i].push([0, 0]);
+    tribals[i].push(changeFlags[i]);
   }
-  return tribal;
+  return tribals;
 }
