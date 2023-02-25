@@ -12,27 +12,37 @@ function writeText(i:number, j:number, text:string):void {
   ctx.fillText(text, i * grid + 2, j * grid + 28);
 }
 
-function findTribesAttr(trabesName:string, tribesArr:Array<any>):Array<any> {
-  const tribeAttr:Array<any> = [];
+function getTribesColor(trabesName:string, tribesArr:Array<any>):string {
   for (let i:number = 0; i < tribesArr.length; i += 1) {
     if (tribesArr[i][0] === trabesName) {
-      tribeAttr.push(tribesArr[i][1], tribesArr[i][3]);
+      return tribesArr[i][1];
     }
   }
-  return tribeAttr;
+  return "red";
+}
+
+function getFlag(name:string) {
+  return new Promise((resolve) => {
+    const pathTemplate = `accets/${name}.svg`;
+    const elem = new Image();
+    elem.src = pathTemplate;
+    elem.onload = () => resolve(elem);
+  });
+}
+
+async function drawElem(name:string, a:number, b:number, c:number, d:number) {
+  const elem = await getFlag(name);
+  return ctx.drawImage(elem, a, b, c, d);
 }
 
 export default function drawFirstTribes(IslandWithTribes:Array<any>, tribesArr:Array<any>):void {
   for (let i:number = 0; i < IslandWithTribes.length; i += 1) {
     for (let j:number = 0; j < IslandWithTribes.length; j += 1) {
       if (IslandWithTribes[i][j][1] !== 0) {
-        const tribeAttr = findTribesAttr(IslandWithTribes[i][j][1], tribesArr);
-        rect(i * grid, j * grid, grid - 1, grid - 1, tribeAttr[0]);
+        const tribeColor = getTribesColor(IslandWithTribes[i][j][1], tribesArr);
+        rect(i * grid, j * grid, grid - 1, grid - 1, tribeColor);
         writeText(i, j, IslandWithTribes[i][j][1]);
-        ctx.drawImage(tribeAttr[1], i * grid + 5, j * grid, grid - 10, grid - 10);
-        // setTribesFirstCord(tribesArr, [i, j]);
-        // const color = tribesArr.filter((tribeName) => tribeName[0] === IslandWithTribes[i][j][0]);
-        console.log(tribeAttr[1]);
+        drawElem(IslandWithTribes[i][j][1], i * grid + 5, j * grid, grid - 10, grid - 10);
       }
     }
   }

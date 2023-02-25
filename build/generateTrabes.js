@@ -21,46 +21,15 @@ function formRgbaString(rgb) {
     const color = `rgba(${r}, ${g} ,${b}, 255)`;
     return color;
 }
-function getImg(name) {
-    const img = new Image();
-    const arrImg = [];
-    img.src = `accets/${name}.svg`;
-    arrImg.push(name);
-    arrImg.push(img);
-    return arrImg;
-}
-function getFlagsForAll(nameArr) {
-    const imgArr = [];
-    let imgName;
-    for (let i = 0; i < nameArr.length; i += 1) {
-        imgName = getImg(nameArr[i]);
-        imgArr.push(imgName);
-    }
-    return imgArr;
-}
-function setFlagsForName(nameArr, flagsImg) {
-    const newArray = [];
-    for (let i = 0; i < nameArr.length; i += 1) {
-        for (let j = 0; j < flagsImg.length; j += 1) {
-            if (nameArr[i] === flagsImg[j][0]) {
-                newArray.push(flagsImg[j][1]);
-            }
-        }
-    }
-    return newArray;
-}
 export default function generateTrabes(matrix, numOftribes) {
     const tribals = [];
     const tribesColor = getTribeAttributtes(allTribesColor, numOftribes);
     const tribesTotemNames = getTribeAttributtes(allTotemNames, numOftribes);
-    const allFlags = getFlagsForAll(allTotemNames);
-    const changeFlags = (setFlagsForName(tribesTotemNames, allFlags));
     for (let i = 0; i < numOftribes; i += 1) {
         tribals.push([]);
         tribals[i].push(tribesTotemNames[i]);
         tribals[i].push(formRgbaString(tribesColor[i]));
         tribals[i].push([0, 0]);
-        tribals[i].push(changeFlags[i]);
     }
     return tribals;
 }
