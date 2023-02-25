@@ -51,5 +51,4 @@ export default function drawFirstTribes(IslandWithTribes, tribesArr) {
             }
         }
     }
-    console.log(tribesArr);
 }

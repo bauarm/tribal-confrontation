@@ -23,29 +23,19 @@ ctx.fillStyle = "rgb(128, 128, 0)";
 ctx.fillRect(0, 0, sizeSceneX, sizeSceneY);
 const arr = generateIsland(sizeField);
 drawIsland(arr);
-console.log(staticForFieldScores(arr));
+// console.log(staticForFieldScores(arr));
 console.log(`Num of best fields ${staticForFieldScores(arr)[10]}`);
 console.log(`Num of worse fields ${staticForFieldScores(arr)[1]}`);
 const numberOftribes = 8;
 const allTribes = generateTribes(arr, numberOftribes);
-console.log(allTribes);
+// console.log(allTribes);
 const setTribesAttr = {
     islandArr: arr,
     tribesArr: allTribes,
     scale: sizeField,
 };
 const islandWithFirstTribes = generateIslandWithTribes(setTribesAttr);
-console.log("isl", islandWithFirstTribes);
+// console.log("isl", islandWithFirstTribes);
 drawFirstTribes(islandWithFirstTribes, allTribes);
-function tribesArrToObj(tribArr) {
-    const tribes = {};
-    for (let i = 0; i < tribArr.length; i += 1) {
-        console.log(tribArr[i]);
-        for (let j = 0; j < tribArr[i].length; j += 1) {
-            console.log(tribArr[i][j]);
-        }
-    }
-}
-// tribesArrToObj(allTribes);
 // document.querySelector("#setTribes")?.addEventListener("click", () => setTribes());
 // console.log(allTribes);

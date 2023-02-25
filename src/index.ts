@@ -30,13 +30,13 @@ const arr = generateIsland(sizeField);
 
 drawIsland(arr);
 
-console.log(staticForFieldScores(arr));
+// console.log(staticForFieldScores(arr));
 console.log(`Num of best fields ${staticForFieldScores(arr)[10]}`);
 console.log(`Num of worse fields ${staticForFieldScores(arr)[1]}`);
 
 const numberOftribes = 8;
 const allTribes:Array<any> = generateTribes(arr, numberOftribes);
-console.log(allTribes);
+// console.log(allTribes);
 
 const setTribesAttr = {
   islandArr: arr,
@@ -45,21 +45,9 @@ const setTribesAttr = {
 };
 
 const islandWithFirstTribes = generateIslandWithTribes(setTribesAttr);
-console.log("isl", islandWithFirstTribes);
+// console.log("isl", islandWithFirstTribes);
 
 drawFirstTribes(islandWithFirstTribes, allTribes);
-
-function tribesArrToObj(tribArr:Array<any>):void {
-  const tribes = {};
-  for (let i:number = 0; i < tribArr.length; i += 1) {
-    console.log(tribArr[i]);
-    for (let j:number = 0; j < tribArr[i].length; j += 1) {
-      console.log(tribArr[i][j]);
-    }
-  }
-}
-
-// tribesArrToObj(allTribes);
 
 // document.querySelector("#setTribes")?.addEventListener("click", () => setTribes());
 

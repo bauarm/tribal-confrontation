@@ -74,6 +74,23 @@ function setAreasQuality(matrix:Array<any>, score:number, quantity:number):Array
   return newArray;
 }
 
+function findPointOnHorLine(QuartRegionArr:Array<any>, pos:Array<any>, point:number):Array<any> {
+  const newArray:Array<any> = QuartRegionArr;
+  let qnt:boolean = true;
+  while (qnt) {
+    for (let i:number = pos[0][0]; i < pos[0][1]; i += 1) {
+      for (let j:number = pos[1][0]; j < pos[1][1]; j += 1) {
+        const passStep = minmaxRand(0, 7);
+        if (QuartRegionArr[i][j][0] >= 0 && passStep === 3 && qnt) {
+          newArray[i][j][0] = point;
+          console.log("45");
+          qnt = false;
+        }
+      }
+    }
+  }
+  return newArray;
+}
 // const arrFrag2 = setAreasQuality(arrFrag, 100, 3);
 
 // eslint-disable-next-line max-len
@@ -99,6 +116,8 @@ function generateRegions(scale:number = 17):Array<any> {
     const EmptyQuartArr = getMatrixArea(matrix, steps[i][0], steps[i][1], regionSize);
     const FullQuartArr = setAreasQuality(EmptyQuartArr, 10, 2);
     setMatrixArea(matrix, FullQuartArr, steps[i][0], steps[i][1], regionSize);
+    findPointOnHorLine(EmptyQuartArr, [[3, 5], [4, 6]], 300);
+    findPointOnHorLine(EmptyQuartArr, [[3, 5], [1, 4]], 700);
   }
   return matrix;
 }
