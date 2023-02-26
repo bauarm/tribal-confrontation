@@ -47,7 +47,7 @@ function makeGround(scale:number = 16):Array<any> {
 function getMatrixArea(matrix:Array<any>, x:number, y:number, size:number):Array<any> {
   const newArray:Array<any> = [];
   let cnt:number = 0;
-  for (let i:number = x; i < x + size; i += 1) {
+  for (let i:number = x; i < x + size - 1; i += 1) {
     newArray.push([]);
     for (let j:number = y; j < y + size; j += 1) {
       newArray[cnt].push(matrix[i][j]);
@@ -57,47 +57,35 @@ function getMatrixArea(matrix:Array<any>, x:number, y:number, size:number):Array
   return newArray;
 }
 
-function setAreasQuality(matrix:Array<any>, score:number, quantity:number):Array<any> {
-  const newArray:Array<any> = matrix;
-  let qnt:number = quantity;
-  while (qnt > 0) {
-    for (let i:number = 0; i < matrix.length; i += 1) {
-      for (let j:number = 0; j < matrix.length; j += 1) {
-        const passStep = minmaxRand(0, 7);
-        if (matrix[i][j][0] >= 0 && passStep === 3 && qnt > 0) {
-          newArray[i][j][0] = score;
-          qnt -= 1;
-        }
-      }
-    }
-  }
-  return newArray;
-}
-
-function findPointOnHorLine(QuartRegionArr:Array<any>, pos:Array<any>, point:number):Array<any> {
-  const newArray:Array<any> = QuartRegionArr;
+function setMiniAreasQuality(QuartRegionArr:Array<any>, pos:Array<any>, point:number):void {
   let qnt:boolean = true;
   while (qnt) {
     for (let i:number = pos[0][0]; i < pos[0][1]; i += 1) {
       for (let j:number = pos[1][0]; j < pos[1][1]; j += 1) {
         const passStep = minmaxRand(0, 7);
         if (QuartRegionArr[i][j][0] >= 0 && passStep === 3 && qnt) {
-          newArray[i][j][0] = point;
-          console.log("45");
+          QuartRegionArr[i][j][0] = point;
           qnt = false;
         }
       }
     }
   }
+}
+
+function setAreasQuality(matrix:Array<any>, quantity:number):Array<any> {
+  const newArray:Array<any> = matrix;
+  setMiniAreasQuality(newArray, [[0, 4], [0, 2]], quantity);
+  setMiniAreasQuality(newArray, [[0, 4], [3, 5]], quantity);
   return newArray;
 }
+
 // const arrFrag2 = setAreasQuality(arrFrag, 100, 3);
 
 // eslint-disable-next-line max-len
 function setMatrixArea(matrix:Array<any>, NewMatrix:Array<any>, x:number, y:number, size:number):void {
   let row:number = 0;
   let col:number;
-  for (let i:number = x; i < x + size; i += 1) {
+  for (let i:number = x; i < x + size - 1; i += 1) {
     col = 0;
     for (let j:number = y; j < y + size; j += 1) {
       // eslint-disable-next-line prefer-destructuring, no-param-reassign
@@ -111,13 +99,11 @@ function setMatrixArea(matrix:Array<any>, NewMatrix:Array<any>, x:number, y:numb
 function generateRegions(scale:number = 17):Array<any> {
   const matrix = makeGround(scale);
   const regionSize:number = Math.floor(scale / 2);
-  const steps = [[0, 0], [regionSize, 0], [0, regionSize], [regionSize, regionSize]];
+  const steps = [[3, 2], [regionSize + 1, 2], [3, regionSize + 1], [regionSize + 1, regionSize + 1]];
   for (let i:number = 0; i < 4; i += 1) {
-    const EmptyQuartArr = getMatrixArea(matrix, steps[i][0], steps[i][1], regionSize);
-    const FullQuartArr = setAreasQuality(EmptyQuartArr, 10, 2);
-    setMatrixArea(matrix, FullQuartArr, steps[i][0], steps[i][1], regionSize);
-    findPointOnHorLine(EmptyQuartArr, [[3, 5], [4, 6]], 300);
-    findPointOnHorLine(EmptyQuartArr, [[3, 5], [1, 4]], 700);
+    const EmptyQuartArr = getMatrixArea(matrix, steps[i][0], steps[i][1], 5);
+    const FullQuartArr = setAreasQuality(EmptyQuartArr, 10);
+    setMatrixArea(matrix, FullQuartArr, steps[i][0], steps[i][1], 5);
   }
   return matrix;
 }
