@@ -52,3 +52,26 @@ drawFirstTribes(islandWithFirstTribes, allTribes);
 // document.querySelector("#setTribes")?.addEventListener("click", () => setTribes());
 
 // console.log(allTribes);
+
+function getAreaAround(matrix:Array<any>, cordX:number, cordY:number) {
+  const quantity:Array<number> = [];
+  for (let i:number = cordX - 1; i < cordX + 2; i += 1) {
+    for (let j:number = cordY - 1; j < cordY + 2; j += 1) {
+      if (i === cordX && j !== cordY) {
+        quantity.push(matrix[i][j][0]);
+      }
+      if (j === cordY && i !== cordX) {
+        quantity.push(matrix[i][j][0]);
+      }
+    }
+  }
+  quantity.sort((a, b) => b - a);
+  return quantity;
+}
+
+canvas.addEventListener("click", (event: any) => {
+  const x = Math.floor((event.clientX - canvas.offsetLeft) / grid);
+  const y = Math.floor((event.clientY - canvas.offsetTop) / grid);
+  console.log(getAreaAround(arr, x, y));
+  console.log(`x - ${x} y - ${y}`, arr[x][y]);
+});
