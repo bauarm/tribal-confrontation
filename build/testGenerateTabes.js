@@ -1,14 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 import { minmaxRand } from "./Helpers.js";
 const allTribesColor = [[255, 0, 0], [139, 0, 0], [199, 21, 133], [255, 69, 0], [139, 69, 19],
     [102, 51, 153], [255, 0, 255], [25, 25, 112], [47, 79, 79], [0, 100, 0]];
@@ -30,20 +19,6 @@ function formRgbaString(rgb) {
     const color = `rgba(${r}, ${g} ,${b}, 255)`;
     return color;
 }
-function downloadEmblem(name) {
-    return new Promise((resolve) => {
-        const pathTemplate = `accets/${name}.svg`;
-        const elem = new Image();
-        elem.src = pathTemplate;
-        elem.onload = () => resolve(elem);
-    });
-}
-function getEmblem(name) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const elem = yield downloadEmblem(name);
-        return elem;
-    });
-}
 export default function generateTrabes(matrix, numOftribes) {
     const tribals = [];
     const tribesColor = getTribeAttributtes(allTribesColor, numOftribes);
@@ -52,7 +27,6 @@ export default function generateTrabes(matrix, numOftribes) {
         tribals.push([]);
         tribals[i].push(tribesTotemNames[i]);
         tribals[i].push(formRgbaString(tribesColor[i]));
-        tribals[i].push(getEmblem(tribesTotemNames[i]).then((img) => img));
         tribals[i].push([0, 0]);
     }
     return tribals;

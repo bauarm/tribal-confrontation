@@ -36,7 +36,27 @@ console.log(`Num of worse fields ${staticForFieldScores(arr)[1]}`);
 
 const numberOftribes = 8;
 const allTribes:Array<any> = generateTribes(arr, numberOftribes);
-// console.log(allTribes);
+console.log(allTribes);
+
+function createGuitar(obj: any[]) {
+  return {
+    name: obj[0],
+    color: obj[1],
+    emblem: obj[2],
+    cord: obj[3],
+  };
+}
+
+function createGuitarFact(arrTrb: string | any[]) {
+  const arrObj = [];
+  for (let i:number = 0; i < arrTrb.length; i += 1) {
+    arrObj.push(createGuitar(arrTrb[i]));
+  }
+  return arrObj;
+}
+
+const arrtest = createGuitarFact(allTribes);
+console.log(arrtest[0]);
 
 const setTribesAttr = {
   islandArr: arr,

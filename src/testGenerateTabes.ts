@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
+import Tribe from "./Tribe.js";
 import { minmaxRand } from "./Helpers.js";
 
 const allTribesColor = [[255, 0, 0], [139, 0, 0], [199, 21, 133], [255, 69, 0], [139, 69, 19],
@@ -25,20 +26,6 @@ function formRgbaString(rgb:Array<number>):string {
   return color;
 }
 
-function downloadEmblem(name:string) {
-  return new Promise((resolve) => {
-    const pathTemplate = `accets/${name}.svg`;
-    const elem = new Image();
-    elem.src = pathTemplate;
-    elem.onload = () => resolve(elem);
-  });
-}
-
-async function getEmblem(name:string) {
-  const elem = await downloadEmblem(name);
-  return elem;
-}
-
 export default function generateTrabes(matrix:Array<any>, numOftribes:number):Array<any> {
   const tribals:Array<any> = [];
   const tribesColor:Array<any> = getTribeAttributtes(allTribesColor, numOftribes);
@@ -47,7 +34,6 @@ export default function generateTrabes(matrix:Array<any>, numOftribes:number):Ar
     tribals.push([]);
     tribals[i].push(tribesTotemNames[i]);
     tribals[i].push(formRgbaString(tribesColor[i]));
-    tribals[i].push(getEmblem(tribesTotemNames[i]).then((img) => img));
     tribals[i].push([0, 0]);
   }
   return tribals;
