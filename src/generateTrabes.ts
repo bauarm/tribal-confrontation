@@ -47,7 +47,7 @@ export default function generateTrabes(matrix:Array<any>, numOftribes:number):Ar
     tribals.push([]);
     tribals[i].push(tribesTotemNames[i]);
     tribals[i].push(formRgbaString(tribesColor[i]));
-    tribals[i].push(getEmblem(tribesTotemNames[i]).then((img) => img));
+    tribals[i].push(getEmblem(tribesTotemNames[i]));
     tribals[i].push([0, 0]);
   }
   return tribals;

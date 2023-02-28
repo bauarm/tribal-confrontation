@@ -56,7 +56,7 @@ function createGuitarFact(arrTrb: string | any[]) {
 }
 
 const arrtest = createGuitarFact(allTribes);
-console.log(arrtest[0]);
+arrtest[0].emblem.then((data: any) => ctx.drawImage(data, 0, 0, 32, 32));
 
 const setTribesAttr = {
   islandArr: arr,
@@ -87,6 +87,11 @@ function getAreaAround(matrix:Array<any>, cordX:number, cordY:number) {
   }
   quantity.sort((a, b) => b - a);
   return quantity;
+}
+
+function makeStep(matrix:Array<any>, cordX:number, cordY:number) {
+  const oldPlace:Array<number> = [];
+  
 }
 
 canvas.addEventListener("click", (event: any) => {
